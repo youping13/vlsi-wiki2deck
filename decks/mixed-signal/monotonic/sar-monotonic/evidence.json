@@ -1,0 +1,142 @@
+{
+ "cards": [
+  {
+   "id": "c34",
+   "goal": "g4",
+   "page": "mixed-signal/monotonic/monotonic-sar-case-study",
+   "wiki_text": "動機：pipeline ADC 需要多顆 op-amp，功耗大，在先進製程又難做；SAR 不用前置放大器時沒有靜態功耗。(src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c35",
+   "goal": "g4",
+   "page": "mixed-signal/sar-basics/sar-vs-pipeline",
+   "wiki_text": "Pipeline 需要 op-amp，op-amp 的增益和線性度會限制效能；SAR 不需要 op-amp。(src: razavi-2015)"
+  },
+  {
+   "id": "c36",
+   "goal": "g4",
+   "page": "mixed-signal/sar-basics/cdac-charge-redistribution",
+   "wiki_text": "電荷重分配 DAC 沒有靜態功耗，這是 SAR 省電的關鍵之一。(src: razavi-2015)"
+  },
+  {
+   "id": "c37",
+   "goal": "g4",
+   "page": "mixed-signal/sar-basics/conversion-speed",
+   "wiki_text": "轉換時間 ≈ N(tcomp + tlogic + tDAC)。(src: razavi-2015)"
+  },
+  {
+   "id": "c38",
+   "goal": "g4",
+   "page": "mixed-signal/sar-basics/binary-search",
+   "wiki_text": "先把 DAC 設在中間值（VREF/2），比較器判斷輸入比它大還小，得到最高位元 MSB。(src: kester-mt021)"
+  },
+  {
+   "id": "c39",
+   "goal": "g4",
+   "page": "mixed-signal/sar-basics/cdac-charge-redistribution",
+   "wiki_text": "判斷 MSB 時 VX = Vi − VR/2，判斷次位元時 VX = Vi − 3VR/4。(src: saxena-lecture)"
+  },
+  {
+   "id": "c40",
+   "goal": "g4",
+   "page": "mixed-signal/monotonic/monotonic-sar-case-study",
+   "wiki_text": "架構：全差動、bootstrapped 開關頂板取樣，電容網路同時當 S/H 和參考 DAC。(src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c41",
+   "goal": "g4",
+   "page": "mixed-signal/sar-basics/comparator",
+   "wiki_text": "SAR 沒有殘值放大，比較器的雜訊會直接限制解析度，通常在 8 位元以上就會成為問題。(src: razavi-2015)"
+  },
+  {
+   "id": "c42",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "動機：SAR 沒有靜態功耗，剩下的功耗大頭之一是電容 DAC 的切換。(src: percy-meeting1, tang-2022-survey)"
+  },
+  {
+   "id": "c43",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "問題 1：傳統是 trial-and-error，猜錯就要切回來，浪費能量。(src: percy-meeting1)"
+  },
+  {
+   "id": "c44",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "問題 2：傳統在第一步就消耗大量能量，因為第一次比較前就要把 MSB 電容切到 Vref。(src: percy-meeting1, liu-2010-monotonic)"
+  },
+  {
+   "id": "c45",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "解法：第一步零切換、只往下（monotonic）切。(src: percy-meeting1)"
+  },
+  {
+   "id": "c46",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "為什麼省：第一次比較不用切任何電容 → 不需要 512C；每個 bit cycle 只切一顆電容 → 功耗較小。(src: percy-meeting1)"
+  },
+  {
+   "id": "c47",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "附帶好處：只往下切 ⇒ DAC 變快，因為 nMOS 的導通電阻約只有同尺寸 pMOS 的 1/3。(src: percy-meeting1, liu-2010-monotonic)"
+  },
+  {
+   "id": "c48",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "代價：Vcm 從 Vref/2 → ground ⇒ signal-dependent offset，要改比較器。(src: percy-meeting1)"
+  },
+  {
+   "id": "c49",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "能量：Power consumption = Vref·ΔQ，ΔQ = Ci·[(Vref − Vtop,final) − (Vbottom,initial − Vtop,initial)] (src: percy-meeting1)"
+  },
+  {
+   "id": "c50",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "步驟 1：ΔV = 0，ΔQ+ = ΔQ− = 0，E = 0"
+  },
+  {
+   "id": "c51",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "步驟 2：ΔV = Vref/2，ΔQ+ = 0，ΔQ− = (C + C)(Vref/2)，E = CVref²"
+  },
+  {
+   "id": "c52",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "步驟 3：ΔV = Vref/4，ΔQ+ = (2C + C)(Vref/4)，ΔQ− = 0，E = ¾CVref²"
+  },
+  {
+   "id": "c53",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "平均能量公式（每個輸出碼機率相同）：$E_{avg,conv} = \\sum_{i=1}^{n} 2^{n+1-2i}(2^i-1)\\,CV_{ref}^2$，$E_{avg,mono} = \\sum_{i=1}^{n-1} 2^{n-2-i}\\,CV_{ref}^2$ (src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c54",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "10 位元平均切換能量：傳統 1365.3 CVref²，monotonic 255.5 CVref²，少 81%。(src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c55",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "**1365.3 還是 1363.3？** 把式 (1) 代入 n = 10 算出 1363.3 CVref²，論文內文和 meeting 簡報都寫 1365.3；式 (2) 代入算出 255.5，跟論文一致。省電比例 1 − 255.5/1363.3 = 81.3%，結論不變（計算）"
+  },
+  {
+   "id": "c56",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "Monotonic 的 N 位元陣列只要 2^(N−1) 顆單位電容，總電容少 50%。(src: liu-2010-monotonic)"
+  }
+ ]
+}

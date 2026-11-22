@@ -1,0 +1,110 @@
+{
+  "g4": {
+    "goal": "想起為什麼用 SAR、它怎麼運作",
+    "keywords": [
+      "靜態功耗",
+      "op-amp",
+      "pipeline",
+      "二元搜尋",
+      "VX"
+    ],
+    "hits": [
+      {
+        "page": "mixed-signal/sar-basics/sources/razavi-2015",
+        "score": 17,
+        "sources": [
+          "razavi-2015"
+        ]
+      },
+      {
+        "page": "mixed-signal/sar-basics/sources/saxena-lecture",
+        "score": 9,
+        "sources": [
+          "saxena-lecture"
+        ]
+      },
+      {
+        "page": "mixed-signal/sar-basics/sar-vs-pipeline",
+        "score": 8,
+        "sources": [
+          "razavi-2015",
+          "saxena-lecture",
+          "tang-2022-survey"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/sources/liu-2010-monotonic",
+        "score": 8,
+        "sources": [
+          "liu-2010-monotonic"
+        ]
+      },
+      {
+        "page": "mixed-signal/basic/adc-architectures",
+        "score": 6,
+        "sources": [
+          "kester-mt021",
+          "percy-meeting1",
+          "razavi-2015",
+          "saxena-lecture"
+        ]
+      }
+    ]
+  },
+  "g5": {
+    "goal": "想起 monotonic 解決什麼、怎麼算出省 81%、代價是什麼",
+    "keywords": [
+      "monotonic",
+      "ΔQ",
+      "切換能量",
+      "Vcm",
+      "trial-and-error"
+    ],
+    "hits": [
+      {
+        "page": "mixed-signal/monotonic/switching-schemes",
+        "score": 41,
+        "sources": [
+          "hu-2024-hybrid",
+          "liu-2010-monotonic",
+          "percy-meeting1",
+          "saxena-lecture",
+          "tang-2022-survey"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/sources/percy-meeting1",
+        "score": 26,
+        "sources": [
+          "percy-meeting1"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/monotonic-sar-case-study",
+        "score": 20,
+        "sources": [
+          "liu-2010-monotonic",
+          "percy-meeting1"
+        ]
+      },
+      {
+        "page": "mixed-signal/sar-basics/comparator",
+        "score": 12,
+        "sources": [
+          "liu-2010-monotonic",
+          "percy-meeting1",
+          "razavi-2015",
+          "saxena-lecture",
+          "tang-2022-survey"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/sources/liu-2010-monotonic",
+        "score": 12,
+        "sources": [
+          "liu-2010-monotonic"
+        ]
+      }
+    ]
+  }
+}

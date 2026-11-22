@@ -1,0 +1,162 @@
+{
+ "title": "代價帶來的電路對策",
+ "author": "Percy · NCKU EE",
+ "date": "2026-11",
+ "wiki_base": "https://github.com/youping13/vlsi-wiki2deck/blob/main/wiki/",
+ "home": "../../index.html",
+ "slides": [
+  {
+   "id": "s0",
+   "layout": "title",
+   "kicker": "vlsi-wiki2deck · C. 電路對策",
+   "title": "代價帶來的電路對策",
+   "subtitle": "共模下降 → 比較器動態 offset、bootstrap、Cds 饋通、實測功耗為什麼偏高",
+   "notes": "骨架：我的專題 meeting 1。從大目錄進來；左上角 ⌂ 回目錄。"
+  },
+  {
+   "id": "s16",
+   "layout": "causal",
+   "kicker": "C · 對策",
+   "title": "比較器：共模下降 → 動態 offset",
+   "figure": "liu2010-fig08",
+   "chain": [
+    {
+     "tag": "動機",
+     "items": [
+      "monotonic 讓 DAC 共模從 Vref/2 降到地 [c57]"
+     ]
+    },
+    {
+     "tag": "問題",
+     "items": [
+      "$V_{os}=\\Delta V_{TH}+\\dfrac{V_{GS}-V_{TH}}{2}(\\dfrac{\\Delta S}{S}+\\dfrac{\\Delta R}{R})$ [c61]",
+      "第二項隨共模變 → 動態 offset [c58]"
+     ]
+    },
+    {
+     "tag": "解法",
+     "items": [
+      "p-type 輸入對＋上方串電流源，有效電壓近似固定 [c59]"
+     ]
+    },
+    {
+     "tag": "為什麼",
+     "items": [
+      "放大比較器會耗電、降有效電壓會變慢 [c60]"
+     ]
+    }
+   ],
+   "notes": "static offset 只平移，不用管；要管的是隨訊號變的那一項。"
+  },
+  {
+   "id": "s17",
+   "layout": "causal",
+   "kicker": "C · 對策",
+   "title": "取樣開關：bootstrap",
+   "svg": "<svg viewBox='0 0 600 400' xmlns='http://www.w3.org/2000/svg' font-family='Noto Sans TC,Noto Sans CJK TC,Microsoft JhengHei,sans-serif'><defs><marker id='ah' markerWidth='10' markerHeight='10' refX='8' refY='5' orient='auto'><path d='M0,0 L10,5 L0,10 z' fill='#1d2433'/></marker></defs><text x='20' y='40' font-size='19' font-weight='700' fill='#1d2433'>bootstrap：把充好電的電容當電池</text><line x1='160' y1='250' x2='440' y2='250' stroke='#1d2433' stroke-width='3'/><text x='150' y='256' font-size='18' text-anchor='end'>Vin</text><text x='452' y='256' font-size='18'>→ Cs</text><rect x='250' y='230' width='100' height='14' fill='#1d2433'/><line x1='250' y1='215' x2='350' y2='215' stroke='#1d2433' stroke-width='3'/><line x1='300' y1='215' x2='300' y2='150' stroke='#1d2433' stroke-width='2'/><text x='300' y='300' font-size='16' text-anchor='middle' fill='#4a5468'>取樣開關（gate 在上、source 接 Vin）</text><line x1='300' y1='150' x2='300' y2='120' stroke='#2f8f5b' stroke-width='2'/><line x1='270' y1='120' x2='330' y2='120' stroke='#2f8f5b' stroke-width='4'/><line x1='280' y1='108' x2='320' y2='108' stroke='#2f8f5b' stroke-width='4'/><text x='340' y='122' font-size='17' fill='#2f8f5b'>電容（先充到 VDD）</text><path d='M300,108 V80 H540 V250' fill='none' stroke='#2f8f5b' stroke-width='2' stroke-dasharray='6 4'/><text x='548' y='170' font-size='15' fill='#2f8f5b'>接 Vin</text><text x='160' y='160' font-size='18' fill='#d9622b'>gate = VDD + Vin</text><text x='160' y='350' font-size='20' font-weight='700' fill='#d9622b'>Vgs = VDD（固定）→ Ron 不隨訊號變</text><text x='590' y='392' font-size='13' text-anchor='end' fill='#8a93a6'>示意圖（自己畫）</text></svg>",
+   "chain": [
+    {
+     "tag": "動機",
+     "items": [
+      "取樣是第一關，開關不線性後面再準也沒用 [c74]"
+     ]
+    },
+    {
+     "tag": "問題",
+     "items": [
+      "一般 MOS 開關 Vgs 隨訊號變 → Ron 跟訊號有關 [c62]"
+     ]
+    },
+    {
+     "tag": "解法",
+     "items": [
+      "用充好電的電容當電池：gate = VDD + Vin [c64,c66]"
+     ]
+    },
+    {
+     "tag": "代價",
+     "items": [
+      "上板 VDD~2VDD → 漏電、breakdown，要多加電晶體 [c65]"
+     ]
+    }
+   ],
+   "notes": "附錄 C 有 Problem 1/2 的細節：M1 反向導通、M3 斷不開。"
+  },
+  {
+   "id": "s18",
+   "layout": "causal",
+   "kicker": "C · 對策",
+   "title": "Cds 饋通：cross-coupled 電容",
+   "chain": [
+    {
+     "tag": "問題",
+     "items": [
+      "開關 OFF 時寄生 Cds 饋通 → 高頻變差、dynamic offset [c67]"
+     ]
+    },
+    {
+     "tag": "為什麼",
+     "items": [
+      "正端變成 $V_{ip}+v_i\\dfrac{C_{ds}}{C_s}$ [c69]"
+     ]
+    },
+    {
+     "tag": "解法",
+     "items": [
+      "兩顆交叉耦合 MOM 電容注入相反電荷 → 中和 [c68]"
+     ]
+    },
+    {
+     "tag": "結果",
+     "items": [
+      "約 5 fF 對 5 fF，抵消到 1/2 LSB（2.5 fF）以內 [c70]"
+     ]
+    }
+   ],
+   "notes": "差動的好處：另一路剛好有反相訊號可以拿來抵消。"
+  },
+  {
+   "id": "s19",
+   "layout": "causal",
+   "kicker": "C · 對策",
+   "title": "實測功耗為什麼比預期高",
+   "chain": [
+    {
+     "tag": "問題",
+     "items": [
+      "參考電壓理想 0.062 mW，實測 0.13 mW [c72]"
+     ]
+    },
+    {
+     "tag": "原因",
+     "items": [
+      "switch buffer 轉態動態電流；底板與 drain 寄生 [c73]"
+     ]
+    },
+    {
+     "tag": "結果",
+     "items": [
+      "總功耗 0.826 mW 中，數位 0.42 mW 最大，不是 DAC [c71]"
+     ]
+    }
+   ],
+   "notes": "monotonic 把 DAC 壓下去之後，瓶頸就移到數位邏輯。"
+  },
+  {
+   "id": "s20",
+   "layout": "quiz",
+   "kicker": "自我測驗",
+   "title": "monotonic 之後為什麼要改比較器？",
+   "question": "Liu 2010 為什麼把比較器改成 p-type 輸入對＋電流源？",
+   "options": [
+    "為了降低 static offset",
+    "共模往地降，有效電壓會變 → 動態 offset",
+    "為了讓比較器更快",
+    "為了減少單位電容數"
+   ],
+   "answer": 1,
+   "explain": "有效電壓隨共模變 → 動態 offset；電流源讓有效電壓近似固定 [c58,c59]",
+   "notes": "答不出來就回到第 16 頁。"
+  }
+ ]
+}

@@ -1,0 +1,112 @@
+{
+ "cards": [
+  {
+   "id": "c57",
+   "goal": "g6",
+   "page": "mixed-signal/sar-basics/comparator",
+   "wiki_text": "動機：monotonic 讓 DAC 共模從 Vref/2 一路降到地。(src: percy-meeting1)"
+  },
+  {
+   "id": "c58",
+   "goal": "g6",
+   "page": "mixed-signal/sar-basics/comparator",
+   "wiki_text": "問題：offset 第二項跟輸入對的有效電壓 (V_GS − V_TH) 有關，而有效電壓會隨輸入共模變 → signal-dependent dynamic offset，第一版原型就被它拉低線性度。(src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c59",
+   "goal": "g6",
+   "page": "mixed-signal/sar-basics/comparator",
+   "wiki_text": "解法：用 p-type 輸入對（輸入會往地靠），並在輸入對上方串一顆偏壓在飽和區的 MOS 當電流源，讓有效電壓近似固定。(src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c60",
+   "goal": "g6",
+   "page": "mixed-signal/sar-basics/comparator",
+   "wiki_text": "為什麼不用其他方法：放大比較器會耗電、降低有效電壓會變慢。(src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c61",
+   "goal": "g6",
+   "page": "mixed-signal/sar-basics/comparator",
+   "wiki_text": "offset 式 (3)：$V_{os} = \\Delta V_{TH1,2} + \\frac{(V_{GS}-V_{TH})_{1,2}}{2}\\left(\\frac{\\Delta S_{1,2}}{S_{1,2}} + \\frac{\\Delta R}{R}\\right)$ (src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c62",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "問題：一般 MOS 開關的 Vgs 會隨訊號變，Ron 跟訊號有關 → 非線性失真。(src: percy-meeting1)"
+  },
+  {
+   "id": "c63",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "解法：bootstrapped switch 讓 Vgs 固定在 VDD → 改善開關線性度。(src: percy-meeting1)"
+  },
+  {
+   "id": "c64",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "為什麼可以：要讓 Vgs 為定值，就在 gate 上接一個電壓源，用充好電的電容實現。(src: percy-meeting1)"
+  },
+  {
+   "id": "c65",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "代價：電容上板電壓是 VDD~2VDD，會造成 M1 漏電、M3 breakdown、M5 耐壓問題，要多加電晶體處理。(src: percy-meeting1)"
+  },
+  {
+   "id": "c66",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "導通時 gate = VDD + Vin，source = Vin，Vgs = VDD。(src: percy-meeting1)"
+  },
+  {
+   "id": "c67",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "第二個問題：開關 OFF 時寄生 Cds 造成訊號饋通，劣化高頻表現並造成 dynamic offset。(src: percy-meeting1)"
+  },
+  {
+   "id": "c68",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "第二個解法：兩顆交叉耦合 MOM 電容（約 5 fF）注入大小相等、方向相反的電荷 → 中和。(src: percy-meeting1)"
+  },
+  {
+   "id": "c69",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "饋通：關斷時正端變成 $V_{ip} + v_i\\frac{C_{ds}}{C_s}$，交叉電容補上 $-v_i\\frac{C_{ds}}{C_s}$，結果回到 $V_{ip}$。(src: percy-meeting1)"
+  },
+  {
+   "id": "c70",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "寄生耦合約 5 fF，交叉耦合 MOM 電容也約 5 fF，抵消到 1/2 LSB（2.5 fF）以內 (src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c71",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/monotonic-sar-case-study",
+   "wiki_text": "總功耗 0.826 mW：類比 0.276 mW、數位 0.42 mW、參考電壓 0.13 mW。(src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c72",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/monotonic-sar-case-study",
+   "wiki_text": "參考電壓功耗：理想值 0.062 mW，實測 0.13 mW。(src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c73",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/monotonic-sar-case-study",
+   "wiki_text": "實測功耗比預期高：switch buffer 在轉態時消耗動態電流；底板與開關 drain 的寄生電容也增加功耗。(src: percy-meeting1)"
+  },
+  {
+   "id": "c74",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "動機：取樣是 ADC 的第一關，開關不線性，後面再準也沒用。(src: percy-meeting1)"
+  }
+ ]
+}

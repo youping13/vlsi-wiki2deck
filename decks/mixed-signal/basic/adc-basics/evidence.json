@@ -1,0 +1,292 @@
+{
+ "cards": [
+  {
+   "id": "c1",
+   "goal": "g1",
+   "page": "mixed-signal/basic/sampling-aliasing",
+   "wiki_text": "動機：ADC 只能處理離散時間的值，所以要先取樣。(src: percy-ms-notes)"
+  },
+  {
+   "id": "c2",
+   "goal": "g1",
+   "page": "mixed-signal/basic/sampling-aliasing",
+   "wiki_text": "問題：取樣會把頻譜每隔 fs 複製一次，頻率 m·fs + Δf 和 Δf 取樣後變成同一個序列。(src: percy-ms-notes)"
+  },
+  {
+   "id": "c3",
+   "goal": "g1",
+   "page": "mixed-signal/basic/sampling-aliasing",
+   "wiki_text": "結論：輸入頻寬必須限制在 fs/2 以內，否則高頻會折回低頻（推論，依 Nyquist）。"
+  },
+  {
+   "id": "c4",
+   "goal": "g1",
+   "page": "mixed-signal/basic/sampling-aliasing",
+   "wiki_text": "頻域：$X_s(f) = \\frac{1}{T_s}\\sum_{k=-\\infty}^{\\infty} X(f-kf_s)$，把原頻譜每隔 fs 複製一次。(src: percy-ms-notes)"
+  },
+  {
+   "id": "c5",
+   "goal": "g1",
+   "page": "mixed-signal/basic/sampling-aliasing",
+   "wiki_text": "混疊推導：$x[n] = \\cos\\!\\left(2\\pi\\frac{mf_s+\\Delta f}{f_s}n\\right) = \\cos(2\\pi mn \\pm 2\\pi\\frac{\\Delta f}{f_s}n) = \\cos\\!\\left(2\\pi\\frac{\\Delta f}{f_s}n\\right)$ (src: percy-ms-notes)"
+  },
+  {
+   "id": "c6",
+   "goal": "g1",
+   "page": "mixed-signal/basic/sampling-aliasing",
+   "wiki_text": "2πmn 是 2π 的整數倍，所以可以消掉。(src: percy-ms-notes)"
+  },
+  {
+   "id": "c7",
+   "goal": "g1",
+   "page": "mixed-signal/basic/sampling-aliasing",
+   "wiki_text": "時域：$x_s(t) = x(t)\\sum_n \\delta(t-nT_s) = \\sum_n x(nT_s)\\,\\delta(t-nT_s)$ (src: percy-ms-notes)"
+  },
+  {
+   "id": "c8",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "動機：要知道一顆 N 位元 ADC 理論上最好能多乾淨。(src: percy-ms-notes)"
+  },
+  {
+   "id": "c9",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "問題：量化誤差在 ±½Q 之間，是實務上一定存在的雜訊。(src: percy-ms-notes)"
+  },
+  {
+   "id": "c10",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "結果：SNR = 6.02 × N + 1.76 是理想最大值，不考慮其它 non-ideal。(src: percy-ms-notes)"
+  },
+  {
+   "id": "c11",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "代價／陷阱：訊號沒滿 code 時，訊號↓、相對雜訊↑、SNR↓。(src: percy-ms-notes)"
+  },
+  {
+   "id": "c12",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "量化雜訊 RMS = LSB/√12 (src: percy-ms-notes)"
+  },
+  {
+   "id": "c13",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "算例條件：10 bits、VDD = 1.2 V；A：Vsig 0~1.2 V；B：Vsig 0.3~0.9 V (src: percy-ms-notes)"
+  },
+  {
+   "id": "c14",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "LSB = 1.2/1024 = 1.17 mV；量化雜訊 RMS = LSB/√12 = 0.34 mV (src: percy-ms-notes)"
+  },
+  {
+   "id": "c15",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "A：振幅 0.6 V、訊號 RMS 0.424 V；SNR = 0.424 / (0.34×10⁻³) = 1247 = 61.9 dB = 6.02×10 + 1.76 (src: percy-ms-notes)"
+  },
+  {
+   "id": "c16",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "B：振幅 0.3 V、訊號 RMS 0.212 V；用 ② SNR = P_signal / P_noise 直接算出 55.9 dB (src: percy-ms-notes)"
+  },
+  {
+   "id": "c17",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "0.6 / 1.17m = 512 → 等效 9 bits ADC (src: percy-ms-notes)"
+  },
+  {
+   "id": "c18",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "擺幅減半 ⇒ SNR 掉 6.02 dB ⇒ 等於少 1 bit：這是「訊號沒滿 code」最直觀的代價。(src: percy-ms-notes)"
+  },
+  {
+   "id": "c19",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-dynamic-parameters",
+   "wiki_text": "動機：靜態的 DNL/INL 看不出高頻時 ADC 表現多差，要用正弦波輸入、看 FFT。(src: percy-meeting1)"
+  },
+  {
+   "id": "c20",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-dynamic-parameters",
+   "wiki_text": "$\\mathrm{SNR(dB)} = 10\\log_{10}\\frac{P_{signal}}{P_{noise}}$ (src: percy-meeting1)"
+  },
+  {
+   "id": "c21",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-dynamic-parameters",
+   "wiki_text": "$\\mathrm{THD(dB)} = 10\\log_{10}\\frac{P_{harmonics}}{P_{signal}}$ (src: percy-meeting1)"
+  },
+  {
+   "id": "c22",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-dynamic-parameters",
+   "wiki_text": "$\\mathrm{SFDR(dBc)} = 10\\log_{10}\\frac{P_{signal}}{P_{max\\_spur}}$ (src: percy-meeting1)"
+  },
+  {
+   "id": "c23",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-dynamic-parameters",
+   "wiki_text": "$\\mathrm{SNDR(dB)} = 10\\log_{10}\\frac{P_{signal}}{P_{noise}+P_{harmonics}}$ (src: percy-meeting1)"
+  },
+  {
+   "id": "c24",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-dynamic-parameters",
+   "wiki_text": "$\\mathrm{ENOB(bits)} = \\frac{\\mathrm{SNDR}-1.76}{6.02}$ (src: percy-meeting1)"
+  },
+  {
+   "id": "c25",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-dynamic-parameters",
+   "wiki_text": "$\\mathrm{FOM} = \\frac{\\mathrm{Power}}{2^{\\mathrm{ENOB}}\\times \\min\\{2\\times \\mathrm{ERBW},\\, f_s\\}}$ (src: percy-meeting1)"
+  },
+  {
+   "id": "c26",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-dynamic-parameters",
+   "wiki_text": "Liu 2010 實測：低頻 SNDR 57.0 dB、ENOB 9.18 bits、FoM 29 fJ/conversion-step、50 MS/s、0.826 mW (src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c27",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-dynamic-parameters",
+   "wiki_text": "驗算 ENOB：(57.0 − 1.76)/6.02 = 9.18 bits（計算）"
+  },
+  {
+   "id": "c28",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-dynamic-parameters",
+   "wiki_text": "驗算 FoM：2^9.18 ≈ 580；0.826 mW / (580 × 50 MHz) ≈ 28.5 fJ，四捨五入就是論文的 29 fJ（計算）"
+  },
+  {
+   "id": "c29",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-dynamic-parameters",
+   "wiki_text": "dBc 是相對載波（輸入訊號），dBFS 是相對滿刻度。(src: percy-meeting1)"
+  },
+  {
+   "id": "c30",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-static-parameters",
+   "wiki_text": "動機：電容失配會讓某些碼特別寬或特別窄，要量出來。(src: percy-meeting1)"
+  },
+  {
+   "id": "c31",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-static-parameters",
+   "wiki_text": "問題：Liu 的晶片 INL 在中間碼 0111111111 → 1000000000 跳動。(src: percy-meeting1)"
+  },
+  {
+   "id": "c32",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-static-parameters",
+   "wiki_text": "原因：佈線寄生讓 MSB 電容大了約 1 LSB；中間碼正是 MSB 翻轉的位置。(src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c33",
+   "goal": "g3",
+   "page": "mixed-signal/basic/adc-static-parameters",
+   "wiki_text": "代價：效能主要受這個固定的電容失配限制。(src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c34",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "動機：Flash 最快、最簡單，把輸入同時和很多個 Vref 比較，直接給出數位輸出。(src: percy-meeting1)"
+  },
+  {
+   "id": "c35",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "問題：Flash 要 2^n − 1 個比較器，耗電，高解析度時很複雜。(src: percy-meeting1)"
+  },
+  {
+   "id": "c36",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "解法 1（分段）：Two-step 先用 Coarse ADC 決定高位元，把殘值放大後再用 Fine ADC 決定低位元。(src: percy-meeting1)"
+  },
+  {
+   "id": "c37",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "解法 2（再多分幾段）：Pipeline 每一級做 ADC → DAC → 相減，把殘值傳給下一級；每級 3 bits，合起來 3n bits。(src: percy-meeting1)"
+  },
+  {
+   "id": "c38",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "代價：pipeline 需要 op-amp 放大殘值，op-amp 的增益和線性度會限制效能。(src: razavi-2015)"
+  },
+  {
+   "id": "c39",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "解法 3（一次 1 bit）：SAR 只用一個比較器重複 N 次，中速時效率好、低功耗。(src: percy-meeting1, razavi-2015)"
+  },
+  {
+   "id": "c40",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "解法 4（用時間換精度）：Integrating 先用輸入對電容充電固定時間 T1，再用參考電壓放電，數放電時間。(src: percy-meeting1)"
+  },
+  {
+   "id": "c41",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "解法 5（並排換速度）：Time-interleaved 讓多個通道輪流取樣，單一通道來不及，就多顆並排錯開時間。(src: percy-meeting1)"
+  },
+  {
+   "id": "c42",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "Two-step 例子：4-bit Flash ADC（15 個碼階）對照 ideal 2-step（2-2）ADC：先決定 2 個 MSB，再對殘值決定 2 個 LSB (src: percy-meeting1)"
+  },
+  {
+   "id": "c43",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "以 4 位元為例：Flash 要 2^4 − 1 = 15 個比較器；2-2 two-step 每段只要 2^2 − 1 = 3 個，兩段共 6 個（計算）"
+  },
+  {
+   "id": "c44",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "交錯的極端例子：8 位元 56 GS/s 用了 320 個 175 MS/s 的 SAR 通道 (src: saxena-lecture)"
+  },
+  {
+   "id": "c45",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "SAR + Time-interleaved：多顆 SAR ADC 共用時脈，各自寫進 RAM，再輪流讀出到 OUT。(src: percy-meeting1)"
+  },
+  {
+   "id": "c46",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "「SAR 的缺點」在 meeting 報告裡只寫「滿多的，但算是 limitation」(src: percy-meeting1)；具體是：一個 bit 一個週期所以速度有限，比較器雜訊直接限制解析度。(src: razavi-2015)"
+  },
+  {
+   "id": "c47",
+   "goal": "g7",
+   "page": "mixed-signal/basic/adc-architectures",
+   "wiki_text": "Two-step：Coarse ADC 先轉出 D_coarse → DAC 轉回類比 → 和 Vin 相減 → 放大 G → Fine ADC 轉出 D_fine → 兩段合成 D_out。(src: percy-meeting1)"
+  },
+  {
+   "id": "c48",
+   "goal": "g2",
+   "page": "mixed-signal/basic/quantization-noise-snr",
+   "wiki_text": "B 旁註：61.9 − 6.02 = 6.02×9 + 1.76，訊號少半 (src: percy-ms-notes)"
+  }
+ ]
+}

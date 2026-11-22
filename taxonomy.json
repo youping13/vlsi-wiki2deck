@@ -1,0 +1,104 @@
+{
+ "id": "vlsi",
+ "title": "VLSI",
+ "desc": "所有東西的起點。新增任何資料、筆記、簡報之前，先問 Percy 要放在哪個節點。",
+ "children": [
+  {
+   "id": "basic",
+   "title": "Basic",
+   "desc": "VLSI 共通基礎",
+   "children": []
+  },
+  {
+   "id": "mixed-signal",
+   "title": "Mixed-Signal",
+   "desc": "ADC 與混合訊號電路",
+   "chain": [
+    {
+     "text": "Flash 太貴 → 分段（two-step、pipeline）或一次 1 bit（SAR）",
+     "deck": "adc-basics",
+     "slide": "a1"
+    },
+    {
+     "text": "取樣會複製頻譜 → 頻寬要限在 fs/2",
+     "deck": "adc-basics",
+     "slide": "s3"
+    },
+    {
+     "text": "量化雜訊 → SNR 上限 6.02N + 1.76；沒滿 code 會掉",
+     "deck": "adc-basics",
+     "slide": "s5"
+    },
+    {
+     "text": "SAR 沒有靜態功耗 → 功耗大頭剩 DAC 切換",
+     "deck": "sar-monotonic",
+     "slide": "s10"
+    },
+    {
+     "text": "monotonic：先比再切、每 bit 只切一顆 → 省 81%",
+     "deck": "sar-monotonic",
+     "slide": "s15"
+    },
+    {
+     "text": "代價：Vcm → 地 → 比較器動態 offset",
+     "deck": "sar-circuits",
+     "slide": "s16"
+    },
+    {
+     "text": "取樣開關 Ron 隨訊號變 → bootstrap",
+     "deck": "sar-circuits",
+     "slide": "s17"
+    }
+   ],
+   "children": [
+    {
+     "id": "basic",
+     "title": "Basic",
+     "desc": "ADC 共通基礎：取樣與混疊、量化雜訊與 SNR（沒滿 code）、動態參數、INL / DNL、FoM",
+     "children": []
+    },
+    {
+     "id": "sar-basics",
+     "title": "SAR 通論",
+     "desc": "SAR 架構本身：二元搜尋、電容 DAC、比較器、速度、冗餘、SAR vs Pipeline；每篇參考資料都有單獨的論述",
+     "children": []
+    },
+    {
+     "id": "monotonic",
+     "title": "Monotonic（Liu 2010）",
+     "kind": "paper",
+     "desc": "論文：A 10-bit 50-MS/s SAR ADC With a Monotonic Capacitor Switching Procedure（JSSC 2010），含我的專題 meeting 1 報告",
+     "children": []
+    }
+   ]
+  },
+  {
+   "id": "bias-circuit",
+   "title": "Bias Circuit",
+   "desc": "偏壓電路",
+   "children": []
+  },
+  {
+   "id": "opamp",
+   "title": "OpAmp",
+   "desc": "運算放大器",
+   "children": []
+  },
+  {
+   "id": "ldo",
+   "title": "LDO",
+   "desc": "低壓降線性穩壓器",
+   "children": []
+  }
+ ],
+ "links": [
+  {
+   "text": "📚 Wiki 首頁",
+   "href": "https://github.com/youping13/vlsi-wiki2deck/blob/main/wiki/index.md"
+  },
+  {
+   "text": "🗺 Roadmap",
+   "href": "https://github.com/youping13/vlsi-wiki2deck/blob/main/docs/roadmap.md"
+  }
+ ]
+}

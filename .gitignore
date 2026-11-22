@@ -1,0 +1,8 @@
+# raw/ 只追蹤來源卡（.md），原檔一律不進 git
+raw/**
+!raw/**/
+!raw/**/*.md
+__pycache__/
+_sync/
+# 反思、loop 設計、繳交說明只留在本機（2027/1/1 前刪除）
+docs/private/

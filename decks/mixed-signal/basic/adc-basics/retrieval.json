@@ -1,0 +1,211 @@
+{
+  "g7": {
+    "goal": "想起各種 ADC 架構為什麼存在、各自用什麼換什麼",
+    "keywords": [
+      "Flash",
+      "Two-step",
+      "Pipeline",
+      "Integrating",
+      "Time-interleaved",
+      "比較器"
+    ],
+    "hits": [
+      {
+        "page": "mixed-signal/basic/adc-architectures",
+        "score": 46,
+        "sources": [
+          "kester-mt021",
+          "percy-meeting1",
+          "razavi-2015",
+          "saxena-lecture"
+        ]
+      },
+      {
+        "page": "mixed-signal/sar-basics/comparator",
+        "score": 16,
+        "sources": [
+          "liu-2010-monotonic",
+          "percy-meeting1",
+          "razavi-2015",
+          "saxena-lecture",
+          "tang-2022-survey"
+        ]
+      },
+      {
+        "page": "mixed-signal/sar-basics/sar-vs-pipeline",
+        "score": 14,
+        "sources": [
+          "razavi-2015",
+          "saxena-lecture",
+          "tang-2022-survey"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/sources/percy-meeting1",
+        "score": 14,
+        "sources": [
+          "percy-meeting1"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/sources/liu-2010-monotonic",
+        "score": 11,
+        "sources": [
+          "liu-2010-monotonic"
+        ]
+      }
+    ]
+  },
+  "g1": {
+    "goal": "想起取樣為什麼會混疊、要怎麼限頻",
+    "keywords": [
+      "取樣",
+      "aliasing",
+      "混疊",
+      "fs"
+    ],
+    "hits": [
+      {
+        "page": "mixed-signal/basic/sampling-aliasing",
+        "score": 23,
+        "sources": [
+          "percy-ms-notes"
+        ]
+      },
+      {
+        "page": "mixed-signal/basic/sources/percy-ms-notes",
+        "score": 19,
+        "sources": [
+          "percy-ms-notes"
+        ]
+      },
+      {
+        "page": "mixed-signal/sar-basics/comparator",
+        "score": 14,
+        "sources": [
+          "liu-2010-monotonic",
+          "percy-meeting1",
+          "razavi-2015",
+          "saxena-lecture",
+          "tang-2022-survey"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/sources/percy-meeting1",
+        "score": 13,
+        "sources": [
+          "percy-meeting1"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/sources/liu-2010-monotonic",
+        "score": 13,
+        "sources": [
+          "liu-2010-monotonic"
+        ]
+      }
+    ]
+  },
+  "g2": {
+    "goal": "想起量化雜訊怎麼決定 SNR 上限、沒滿 code 會掉多少",
+    "keywords": [
+      "量化雜訊",
+      "SNR",
+      "LSB",
+      "6.02"
+    ],
+    "hits": [
+      {
+        "page": "mixed-signal/basic/quantization-noise-snr",
+        "score": 45,
+        "sources": [
+          "percy-meeting1",
+          "percy-ms-notes",
+          "tang-2022-survey"
+        ]
+      },
+      {
+        "page": "mixed-signal/basic/sources/percy-ms-notes",
+        "score": 34,
+        "sources": [
+          "percy-ms-notes"
+        ]
+      },
+      {
+        "page": "mixed-signal/basic/adc-static-parameters",
+        "score": 8,
+        "sources": [
+          "liu-2010-monotonic",
+          "percy-meeting1"
+        ]
+      },
+      {
+        "page": "mixed-signal/basic/adc-dynamic-parameters",
+        "score": 8,
+        "sources": [
+          "liu-2010-monotonic",
+          "percy-meeting1",
+          "tang-2022-survey"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/sources/liu-2010-monotonic",
+        "score": 5,
+        "sources": [
+          "liu-2010-monotonic"
+        ]
+      }
+    ]
+  },
+  "g3": {
+    "goal": "會從頻譜讀動態參數、會算 ENOB 與 FoM、知道 INL 跳的原因",
+    "keywords": [
+      "SNDR",
+      "ENOB",
+      "FOM",
+      "INL",
+      "DNL"
+    ],
+    "hits": [
+      {
+        "page": "mixed-signal/basic/adc-dynamic-parameters",
+        "score": 22,
+        "sources": [
+          "liu-2010-monotonic",
+          "percy-meeting1",
+          "tang-2022-survey"
+        ]
+      },
+      {
+        "page": "mixed-signal/basic/adc-static-parameters",
+        "score": 16,
+        "sources": [
+          "liu-2010-monotonic",
+          "percy-meeting1"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/sources/liu-2010-monotonic",
+        "score": 14,
+        "sources": [
+          "liu-2010-monotonic"
+        ]
+      },
+      {
+        "page": "mixed-signal/basic/figures-of-merit",
+        "score": 12,
+        "sources": [
+          "liu-2010-monotonic",
+          "tang-2022-survey"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/sources/percy-meeting1",
+        "score": 8,
+        "sources": [
+          "percy-meeting1"
+        ]
+      }
+    ]
+  }
+}

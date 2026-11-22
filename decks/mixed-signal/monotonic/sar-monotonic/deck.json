@@ -1,0 +1,162 @@
+{
+ "title": "SAR 與 monotonic：為什麼省 81%",
+ "author": "Percy · NCKU EE",
+ "date": "2026-11",
+ "wiki_base": "https://github.com/youping13/vlsi-wiki2deck/blob/main/wiki/",
+ "home": "../../index.html",
+ "slides": [
+  {
+   "id": "s0",
+   "layout": "title",
+   "kicker": "vlsi-wiki2deck · B. SAR 與 monotonic",
+   "title": "SAR 與 monotonic：為什麼省 81%",
+   "subtitle": "為什麼用 SAR、傳統切換哪裡浪費、ΔQ 能量推導、monotonic 怎麼省與代價",
+   "notes": "骨架：我的專題 meeting 1。從大目錄進來；左上角 ⌂ 回目錄。"
+  },
+  {
+   "id": "s10",
+   "layout": "causal",
+   "kicker": "B · SAR",
+   "title": "為什麼用 SAR",
+   "chain": [
+    {
+     "tag": "動機",
+     "items": [
+      "pipeline 要多顆 op-amp：耗電、先進製程又難做 [c34]"
+     ]
+    },
+    {
+     "tag": "解法",
+     "items": [
+      "SAR 不需要 op-amp [c35]",
+      "電荷重分配 DAC 沒有靜態功耗 [c36]"
+     ]
+    },
+    {
+     "tag": "代價",
+     "items": [
+      "一個 bit 一個週期：$t\\approx N(t_{comp}+t_{logic}+t_{DAC})$ [c37]",
+      "沒有殘值放大，比較器雜訊直接限制解析度 [c41]"
+     ]
+    }
+   ],
+   "notes": "SAR 的弱點就是速度與比較器雜訊。"
+  },
+  {
+   "id": "s11",
+   "layout": "diagram",
+   "kicker": "B · SAR",
+   "title": "SAR 怎麼運作（快速回想）",
+   "figure": "liu2010-fig01",
+   "bullets": [
+    "DAC 先設 $\\dfrac{V_{REF}}{2}$，比較器決定 MSB [c38]",
+    "MSB：$V_X=V_i-\\dfrac{V_R}{2}$；次位元：$V_X=V_i-\\dfrac{3V_R}{4}$ [c39]",
+    "電容網路同時當 S/H 和參考 DAC [c40]",
+    "一個 bit 一個週期：$t\\approx N(t_{comp}+t_{logic}+t_{DAC})$ [c37]"
+   ],
+   "notes": "右圖是傳統 10 位元全差動 SAR，後面幾頁都拿它來比。"
+  },
+  {
+   "id": "s12",
+   "layout": "causal",
+   "kicker": "B · monotonic",
+   "title": "傳統切換的問題",
+   "chain": [
+    {
+     "tag": "動機",
+     "items": [
+      "沒有靜態功耗 → 功耗大頭之一是 DAC 切換 [c42]"
+     ]
+    },
+    {
+     "tag": "問題",
+     "items": [
+      "trial-and-error：猜錯就要切回來 [c43]"
+     ]
+    },
+    {
+     "tag": "問題",
+     "items": [
+      "第一次比較前就要把 MSB 切到 Vref，第一步最耗電 [c44]"
+     ]
+    },
+    {
+     "tag": "為什麼",
+     "items": [
+      "能量 = Vref × 從 Vref 抽的電荷；切越多、切越大越耗 [c49]"
+     ]
+    }
+   ],
+   "notes": "這兩個問題就是 monotonic 要解的對象。"
+  },
+  {
+   "id": "s13",
+   "layout": "calc",
+   "kicker": "B · monotonic",
+   "title": "能量怎麼算：3-bit 走一遍",
+   "given": [
+    "$E=V_{ref}\\cdot\\Delta Q$ [c49]",
+    "$\\Delta Q=C_i[(V_{ref}-V_{top,f})-(V_{bot,i}-V_{top,i})]$ [c49]"
+   ],
+   "steps": [
+    "步驟 1：$\\Delta V=0$ → $E=0$（先比、不切）[c50]",
+    "步驟 2：$\\Delta V=\\dfrac{V_{ref}}{2}$，$\\Delta Q_-=(C+C)\\dfrac{V_{ref}}{2}$ → $E=CV_{ref}^2$ [c51]",
+    "步驟 3：$\\Delta V=\\dfrac{V_{ref}}{4}$，$\\Delta Q_+=(2C+C)\\dfrac{V_{ref}}{4}$ → $E=\\dfrac{3}{4}CV_{ref}^2$ [c52]"
+   ],
+   "result": "每一步只有一側抽電荷，而且第一步不耗能 [c50,c51]",
+   "notes": "ΔQ 只算接在 Vref 上的電容充了多少電。"
+  },
+  {
+   "id": "s14",
+   "layout": "calc",
+   "kicker": "B · monotonic",
+   "title": "平均能量：省 81% 從哪來",
+   "given": [
+    "每個輸出碼機率相同 [c53]"
+   ],
+   "steps": [
+    "$E_{avg,conv}=\\sum_{i=1}^{n}2^{n+1-2i}(2^i-1)CV_{ref}^2$ [c53]",
+    "$E_{avg,mono}=\\sum_{i=1}^{n-1}2^{n-2-i}CV_{ref}^2$ [c53]",
+    "n = 10：傳統 1365.3、monotonic 255.5 $CV_{ref}^2$ [c54]",
+    "自己代式 (1) 算出 1363.3，論文和 meeting 都寫 1365.3 [c55]"
+   ],
+   "result": "1 − 255.5/1363.3 = 81.3%，結論不變 [c55]",
+   "notes": "1365.3 vs 1363.3 是論文本身的小差異，記著就好。"
+  },
+  {
+   "id": "s15",
+   "layout": "causal",
+   "kicker": "B · monotonic",
+   "title": "monotonic：怎麼解、為什麼省",
+   "figure": "liu2010-fig04",
+   "chain": [
+    {
+     "tag": "解法",
+     "items": [
+      "第一步零切換、只往下（monotonic）切 [c45]"
+     ]
+    },
+    {
+     "tag": "為什麼",
+     "items": [
+      "先比再切 → 不需要 512C；每 bit 只切一顆 [c46]",
+      "只往下：nMOS Ron 約 pMOS 的 1/3 → DAC 變快 [c47]"
+     ]
+    },
+    {
+     "tag": "優點",
+     "items": [
+      "單位電容只要 $2^{N-1}$ 顆，總電容少 50% [c56]"
+     ]
+    },
+    {
+     "tag": "代價",
+     "items": [
+      "Vcm 從 Vref/2 → ground ⇒ signal-dependent offset [c48]"
+     ]
+    }
+   ],
+   "notes": "看 Fig. 4(b)：兩條線一起往下走，就是共模下降。"
+  }
+ ]
+}

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__DECK_TITLE__</title>
+<link rel="stylesheet" href="../../template/vendor/katex/katex.min.css">
+<script defer src="../../template/vendor/katex/katex.min.js"></script>
+<script defer src="../../template/vendor/katex/auto-render.min.js"></script>
+<!-- wiki2deck template v2 — 內容由 pipeline/wiki2deck.py render 注入，請勿手改產出的 index.html -->
+<style>
+:root{
+  --ink:#1d2433; --ink-2:#4a5468; --muted:#8a93a6; --paper:#fbfaf7; --line:#e6e2d8;
+  --accent:#d9622b; --accent-2:#2f6f8f; --accent-soft:#fbe9df; --blue-soft:#e3eff5;
+  --ok:#2f8f5b; --bad:#c2413b; --stage-w:1280px; --stage-h:720px;
+  --sans:"Noto Sans TC","Noto Sans CJK TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;
+  --mono:"JetBrains Mono","Cascadia Code",Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#20242c;font-family:var(--sans);color:var(--ink)}
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#stage{width:var(--stage-w);height:var(--stage-h);position:relative;transform-origin:center center;flex:none}
+.slide{position:absolute;inset:0;background:var(--paper);padding:56px 80px 96px;display:none;flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);overflow:hidden}
+.slide.active{display:flex;animation:in .28s ease-out}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.kicker{font-size:15px;letter-spacing:.18em;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:10px}
+h1.title{font-size:44px;line-height:1.25;font-weight:800;margin-bottom:28px;max-width:1050px}
+h1.title .en{font-weight:500;color:var(--muted);font-size:.6em;margin-left:.3em}
+.body{flex:1;display:flex;gap:48px;min-height:0}
+.col{flex:1;min-width:0;display:flex;flex-direction:column}
+ul.pts{list-style:none;display:flex;flex-direction:column;gap:18px}
+ul.pts li{font-size:26px;line-height:1.5;padding-left:34px;position:relative}
+ul.pts li::before{content:"";position:absolute;left:4px;top:.62em;width:12px;height:12px;border-radius:3px;background:var(--accent);transform:rotate(45deg)}
+.col h3{font-size:22px;color:var(--accent-2);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--blue-soft)}
+.col ul.pts li{font-size:23px}
+.cite{display:inline-block;font-size:.55em;vertical-align:super;color:var(--accent-2);font-family:var(--mono);margin-left:3px;cursor:help;font-weight:600}
+.fig{flex:1.15;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.fig svg{width:100%;height:100%;max-height:400px}
+.footer{position:absolute;left:80px;right:80px;bottom:22px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;font-size:13px;color:var(--muted)}
+.refs{display:flex;flex-wrap:wrap;gap:6px;max-width:960px}
+.ref{border:1px solid var(--line);border-radius:999px;padding:2px 10px;background:#fff;color:var(--ink-2);text-decoration:none;font-family:var(--mono);font-size:12px}
+.ref:hover{border-color:var(--accent-2);color:var(--accent-2)}
+.ref b{color:var(--accent-2)}
+.pageno{font-family:var(--mono)}
+/* 論文原圖 */
+.paper{flex:1.2;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px 10px;min-height:0}
+.paper .imgwrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.paper img{max-width:100%;max-height:100%;object-fit:contain}
+.paper figcaption{font-size:13px;line-height:1.45;color:var(--ink-2);margin-top:8px;border-top:1px dashed var(--line);padding-top:6px}
+.paper figcaption b{color:var(--accent)}
+.paper figcaption .src{display:block;color:var(--muted);font-family:var(--mono);font-size:11.5px}
+.katex{font-size:1.02em}
+.q .katex,.explain .katex{font-size:1em}
+/* causal：動機 → 問題 → 解法 → 代價 */
+.chain{display:flex;gap:14px;align-items:stretch;flex:1;min-height:0}
+.chain.h{align-items:center;padding-bottom:30px}
+.chain.h .step{flex:1;min-height:200px;justify-content:flex-start}
+.chain.h .step li{font-size:23px}
+.chain.h .step .tag{font-size:17px}
+.chain.v{flex-direction:column;gap:10px}
+.step{position:relative;background:#fff;border:1px solid var(--line);border-top:5px solid var(--c);border-radius:12px;padding:12px 16px 14px;display:flex;flex-direction:column}
+.chain.v .step{flex-direction:row;align-items:flex-start;gap:14px;border-top:1px solid var(--line);border-left:6px solid var(--c);padding:10px 14px}
+.step .tag{font-size:15px;font-weight:800;color:var(--c);letter-spacing:.08em;margin-bottom:8px;white-space:nowrap}
+.chain.v .step .tag{min-width:64px;margin:3px 0 0}
+.step ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.step li{font-size:20px;line-height:1.45}
+.chain.v .step li{font-size:19px}
+.chain.h .step:not(:last-child)::after{content:"→";position:absolute;right:-16px;top:42%;font-size:22px;color:var(--muted);z-index:2}
+.t-motive{--c:#2f6f8f}.t-problem{--c:#c2413b}.t-why{--c:#8b5cf6}.t-solution{--c:#2f8f5b}.t-cost{--c:#d9622b}
+/* calc：條件 → 步驟 → 結論 */
+.calc{display:flex;gap:28px;flex:1;min-height:0;align-items:flex-start;padding-top:10px}
+.calc .given{flex:.8;background:var(--blue-soft);border-radius:12px;padding:16px 18px;align-self:flex-start}
+.calc .given h3,.calc .steps h3{font-size:16px;letter-spacing:.1em;color:var(--accent-2);margin-bottom:10px}
+.calc .given li{font-size:21px;line-height:1.55;list-style:none;margin-bottom:6px}
+.calc .steps{flex:1.5;display:flex;flex-direction:column}
+.calc ol{counter-reset:s;list-style:none;display:flex;flex-direction:column;gap:20px}
+.calc ol li{counter-increment:s;font-size:24px;line-height:1.5;padding-left:38px;position:relative}
+.calc ol li::before{content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.calc .result{margin-top:28px;font-size:22px;font-weight:700;background:var(--accent-soft);border-left:6px solid var(--accent);padding:12px 16px;border-radius:8px}
+/* 純文字頁：放大＋垂直置中，避免下半頁空白 */
+.l-bullets .col,.l-summary .col{justify-content:center;padding-bottom:40px}
+.l-bullets ul.pts,.l-summary ul.pts{gap:30px}
+.l-bullets ul.pts li,.l-summary ul.pts li{font-size:31px}
+.l-two-col .body{align-items:stretch;flex:0 1 auto;margin-top:24px}
+.l-two-col .col{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 30px 34px;justify-content:flex-start}
+.l-two-col .col h3{font-size:24px}
+.l-two-col .col ul.pts{gap:24px}
+.l-two-col .col ul.pts li{font-size:26px}
+/* title slide */
+.slide.l-title{background:radial-gradient(1200px 600px at 85% 110%,#36506a 0%,#1d2433 55%);color:#fff;justify-content:center}
+.slide.l-title h1{font-size:60px;line-height:1.2;font-weight:800;max-width:980px}
+.slide.l-title .sub{font-size:26px;color:#c9d3e3;margin-top:22px;max-width:900px;line-height:1.5}
+.slide.l-title .meta{margin-top:56px;font-size:18px;color:#9fb0c8}
+.slide.l-title .kicker{color:#f3a37a}
+.slide.l-title .footer{color:#7f8ea6}
+.slide.l-title .bar{width:96px;height:6px;background:var(--accent);border-radius:3px;margin-bottom:28px}
+/* quiz */
+.q{font-size:30px;font-weight:700;margin-bottom:26px;line-height:1.45}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.opt{font:inherit;font-size:24px;text-align:left;padding:18px 22px;border-radius:12px;border:2px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
+.opt:hover{border-color:var(--accent-2)}
+.opt.right{border-color:var(--ok);background:#e6f4ec}
+.opt.wrong{border-color:var(--bad);background:#fbe8e7}
+.explain{margin-top:24px;font-size:23px;line-height:1.55;padding:16px 22px;border-left:5px solid var(--ok);background:#f0f7f2;border-radius:6px;display:none}
+.explain.show{display:block}
+/* summary */
+.slide.l-summary ul.pts li::before{content:"✓";background:none;transform:none;color:var(--ok);font-weight:800;top:0;left:0;width:auto;height:auto;font-size:26px}
+/* chrome */
+#progress{position:fixed;left:0;top:0;height:4px;background:var(--accent);transition:width .25s;z-index:5}
+#home{position:fixed;left:14px;top:12px;z-index:7;color:#dfe6f1;background:rgba(17,21,28,.55);border:1px solid rgba(255,255,255,.18);text-decoration:none;font-size:13px;padding:5px 11px;border-radius:999px}
+#home:hover{background:rgba(17,21,28,.85)}
+#hud{position:fixed;right:16px;bottom:12px;color:#aab3c4;font-size:12px;font-family:var(--mono);opacity:.7;z-index:5}
+#notes{position:fixed;left:0;right:0;bottom:0;max-height:32vh;overflow:auto;background:#11151c;color:#dfe6f1;font-size:16px;line-height:1.6;padding:14px 22px;display:none;z-index:6;border-top:2px solid var(--accent)}
+#notes.show{display:block}
+#tip{position:fixed;max-width:460px;background:#11151c;color:#e8edf5;font-size:14px;line-height:1.55;padding:10px 14px;border-radius:8px;pointer-events:none;display:none;z-index:9;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+#tip small{display:block;color:#f3a37a;font-family:var(--mono);margin-bottom:4px}
+body.overview #stage{transform:none!important;width:auto;height:auto;display:grid;grid-template-columns:repeat(4,320px);gap:18px;padding:30px;position:static}
+body.overview #viewport{overflow:auto;align-items:flex-start}
+body.overview .slide{display:flex!important;position:relative;width:1280px;height:720px;transform:scale(.25);transform-origin:top left;margin-bottom:-540px;margin-right:-960px;cursor:pointer;animation:none}
+@media print{
+  @page{size:1280px 720px;margin:0}
+  html,body{background:#fff}
+  #viewport{position:static;display:block}
+  #stage{transform:none!important}
+  .slide{display:flex!important;position:relative;page-break-after:always;box-shadow:none;animation:none}
+  #progress,#hud,#notes,#tip,#home{display:none!important}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="viewport"><div id="stage"></div></div>
+<a id="home" href="../../index.html" title="回大目錄">⌂ 目錄</a>
+<div id="hud">← → 換頁 · N 講稿 · O 總覽 · H 目錄 · P 列印/PDF</div>
+<div id="notes"></div>
+<div id="tip"></div>
+<script>
+const DATA = /*__DECK_DATA__*/null;
+(function(){
+  const deck = DATA.deck, cards = DATA.cards, figures = DATA.figures || {}, stage = document.getElementById('stage');
+  function paper(id){
+    const f = figures[id]; if (!f) return '';
+    return `<figure class="paper"><div class="imgwrap"><img src="${f.src}" alt="${esc(f.label)}"></div>
+      <figcaption><b>${esc(f.label)}</b>　${esc(f.desc)}<span class="src">圖源：${esc(f.cite)}，© 原出版者，僅供教學引用</span></figcaption></figure>`;
+  }
+  const wikiBase = deck.wiki_base || '../../wiki/';
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const CITE = /\[(c\d+(?:\s*,\s*c\d+)*)\]/g;
+  function rich(t, used){
+    return esc(t).replace(CITE, (_, ids) => ids.split(',').map(s => s.trim()).map(id => {
+      used.add(id); return `<span class="cite" data-card="${id}">${id}</span>`;
+    }).join(''));
+  }
+  function list2(items, used){ return `<ul>${(items||[]).map(t => `<li>${rich(t, used)}</li>`).join('')}</ul>`; }
+  function list(items, used){ return `<ul class="pts">${(items||[]).map(t => `<li>${rich(t, used)}</li>`).join('')}</ul>`; }
+  function head(s){
+    const k = s.kicker ? `<div class="kicker">${esc(s.kicker)}</div>` : '';
+    const en = s.en ? `<span class="en">${esc(s.en)}</span>` : '';
+    return `${k}<h1 class="title">${esc(s.title)}${en}</h1>`;
+  }
+  function refs(used){
+    return [...used].sort((a,b)=>+a.slice(1)-+b.slice(1)).map(id => {
+      const c = cards[id]; if(!c) return '';
+      return `<a class="ref" data-card="${id}" href="${wikiBase}${c.page}.md" target="_blank"><b>${id}</b> ${esc(c.page.split('/').pop())} ← ${esc(c.sources.join(', '))}</a>`;
+    }).join('');
+  }
+  const slides = deck.slides.map((s, i) => {
+    const used = new Set(); let inner = '';
+    const L = s.layout || 'bullets';
+    if (L === 'title') {
+      inner = `<div class="bar"></div>${s.kicker?`<div class="kicker">${esc(s.kicker)}</div>`:''}<h1>${esc(s.title)}</h1>
+        ${s.subtitle?`<div class="sub">${esc(s.subtitle)}</div>`:''}<div class="meta">${esc(deck.author||'')}${deck.date?' · '+esc(deck.date):''}</div>`;
+    } else if (L === 'two-col') {
+      inner = head(s) + `<div class="body"><div class="col"><h3>${esc(s.left_title||'')}</h3>${list(s.left, used)}</div>
+        <div class="col"><h3>${esc(s.right_title||'')}</h3>${list(s.right, used)}</div></div>`;
+    } else if (L === 'diagram') {
+      const visual = s.figure ? paper(s.figure) : `<div class="fig">${s.svg||''}</div>`;
+      inner = head(s) + `<div class="body"><div class="col" style="flex:.85">${list(s.bullets, used)}</div>${visual}</div>`;
+    } else if (L === 'causal') {
+      const TAG = {'動機':'t-motive','問題':'t-problem','為什麼':'t-why','解法':'t-solution','代價':'t-cost','優缺點':'t-cost','結果':'t-solution','原因':'t-why'};
+      const visual = s.figure ? paper(s.figure) : (s.svg ? `<div class="fig">${s.svg}</div>` : '');
+      const chain = `<div class="chain ${visual ? 'v' : 'h'}">${(s.chain||[]).map(c => `<div class="step ${TAG[c.tag]||'t-why'}"><div class="tag">${esc(c.tag)}</div>${list2(c.items, used)}</div>`).join('')}</div>`;
+      inner = head(s) + (visual ? `<div class="body"><div class="col" style="flex:1.05">${chain}</div>${visual}</div>` : `<div class="body">${chain}</div>`);
+    } else if (L === 'calc') {
+      inner = head(s) + `<div class="calc"><div class="given"><h3>條件</h3><ul>${(s.given||[]).map(g=>`<li>${rich(g, used)}</li>`).join('')}</ul></div>
+        <div class="steps"><h3>步驟</h3><ol>${(s.steps||[]).map(g=>`<li>${rich(g, used)}</li>`).join('')}</ol>${s.result?`<div class="result">${rich(s.result, used)}</div>`:''}</div></div>`;
+    } else if (L === 'quiz') {
+      inner = head(s) + `<div class="q">${esc(s.question)}</div><div class="opts">${s.options.map((o,j)=>`<button class="opt" data-j="${j}">${String.fromCharCode(65+j)}. ${esc(o)}</button>`).join('')}</div>
+        <div class="explain">${rich(s.explain||'', used)}</div>`;
+    } else {
+      inner = head(s) + `<div class="body"><div class="col">${list(s.bullets, used)}</div></div>`;
+    }
+    const el = document.createElement('section');
+    el.className = `slide l-${L}`; el.dataset.i = i;
+    el.innerHTML = inner + `<div class="footer"><div class="refs">${refs(used)}</div><div class="pageno">${i+1} / ${deck.slides.length}</div></div>`;
+    if (L === 'quiz') el.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+      el.querySelectorAll('.opt').forEach(x => x.classList.add(+x.dataset.j === s.answer ? 'right' : (x === b ? 'wrong' : 'z')));
+      el.querySelector('.explain').classList.add('show');
+    });
+    stage.appendChild(el); return el;
+  });
+  // navigation
+  let cur = Math.min(Math.max((parseInt(location.hash.slice(1))||1)-1, 0), slides.length-1);
+  const notes = document.getElementById('notes');
+  function show(i){
+    cur = Math.max(0, Math.min(slides.length-1, i));
+    slides.forEach((s,j) => s.classList.toggle('active', j===cur));
+    document.getElementById('progress').style.width = ((cur+1)/slides.length*100)+'%';
+    history.replaceState(null,'','#'+(cur+1));
+    notes.innerHTML = '<b>講稿 '+(cur+1)+'：</b>'+esc(deck.slides[cur].notes||'（無）');
+  }
+  function fit(){
+    if (document.body.classList.contains('overview')) return;
+    const k = Math.min(innerWidth/1280, innerHeight/720) * .96;
+    stage.style.transform = `scale(${k})`;
+  }
+  addEventListener('resize', fit);
+  addEventListener('keydown', e => {
+    if (['ArrowRight','PageDown',' ','Enter'].includes(e.key)) { show(cur+1); e.preventDefault(); }
+    else if (['ArrowLeft','PageUp','Backspace'].includes(e.key)) { show(cur-1); e.preventDefault(); }
+    else if (e.key==='Home') show(0); else if (e.key==='End') show(slides.length-1);
+    else if (e.key==='n'||e.key==='N') notes.classList.toggle('show');
+    else if (e.key==='o'||e.key==='O') { document.body.classList.toggle('overview'); fit(); if(!document.body.classList.contains('overview')) fit(); }
+    else if (e.key==='p'||e.key==='P') print();
+  });
+  stage.addEventListener('click', e => {
+    if (document.body.classList.contains('overview')) {
+      const s = e.target.closest('.slide'); if (s) { document.body.classList.remove('overview'); show(+s.dataset.i); fit(); }
+      return;
+    }
+    if (e.target.closest('button,a,.cite')) return;
+    show(e.clientX > innerWidth/3 ? cur+1 : cur-1);
+  });
+  let tx = null;
+  addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+  addEventListener('touchend', e => { if (tx===null) return; const d = e.changedTouches[0].clientX - tx; if (Math.abs(d)>40) show(cur + (d<0?1:-1)); tx=null; });
+  // citation tooltip: 顯示 wiki 原文證據
+  const tip = document.getElementById('tip');
+  document.addEventListener('mouseover', e => {
+    const t = e.target.closest('[data-card]'); if (!t) return;
+    const c = cards[t.dataset.card]; if (!c) return;
+    tip.innerHTML = `<small>${t.dataset.card} · wiki/${esc(c.page)}</small>${esc(c.text)}`;
+    tip.style.display = 'block';
+  });
+  document.addEventListener('mousemove', e => { tip.style.left = Math.min(e.clientX+14, innerWidth-480)+'px'; tip.style.top = Math.max(e.clientY-14-tip.offsetHeight, 8)+'px'; });
+  document.addEventListener('mouseout', e => { if (e.target.closest('[data-card]')) tip.style.display = 'none'; });
+  if (deck.home) document.getElementById('home').href = deck.home;
+  addEventListener('keydown', e => { if (e.key === 'h' || e.key === 'H') location.href = document.getElementById('home').href; });
+  fit(); show(cur);
+  // LaTeX：$…$ 行內、$$…$$ 置中（KaTeX，檔案在 template/vendor/katex，離線可用）
+  addEventListener('load', () => { if (window.renderMathInElement) renderMathInElement(stage, {
+    delimiters: [{left:'$$', right:'$$', display:true}, {left:'$', right:'$', display:false}], throwOnError:false }); });
+})();
+</script>
+</body>
+</html>
