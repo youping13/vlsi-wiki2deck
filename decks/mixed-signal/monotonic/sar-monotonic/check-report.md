@@ -245,3 +245,119 @@
 ### [2026-11-22 14:52:04 +0000] render + render gate — PASS
 - 輸出 decks/mixed-signal/monotonic/sar-monotonic/index.html（7 頁，23 張卡片被引用，26 KB）
 
+### [2026-11-22 23:21:11 +0800] retrieve — PASS
+- g4 想起為什麼用 SAR、它怎麼運作 → mixed-signal/sar-basics/sources/razavi-2015(17), mixed-signal/sar-basics/sources/saxena-lecture(9), mixed-signal/sar-basics/sar-vs-pipeline(8), mixed-signal/monotonic/sources/liu-2010-monotonic(8), mixed-signal/basic/adc-architectures(6)
+- g5 想起 monotonic 解決什麼、怎麼算出省 81%、代價是什麼 → mixed-signal/monotonic/switching-schemes(41), mixed-signal/monotonic/sources/percy-meeting1(26), mixed-signal/monotonic/monotonic-sar-case-study(20), mixed-signal/sar-basics/comparator(12), mixed-signal/monotonic/sources/liu-2010-monotonic(12)
+
+### [2026-11-22 23:21:11 +0800] coverage gate — PASS
+- g4 OK：5 頁、6 個來源
+- g5 OK：5 頁、6 個來源
+
+### [2026-11-22 23:21:11 +0800] evidence gate — PASS
+- 24 張卡
+
+### [2026-11-22 23:21:11 +0800] human approve gate — PASS
+
+### [2026-11-22 23:21:11 +0800] faithfulness gate — FAIL
+- ❌ s12b「monotonic 怎麼切（3-bit，Fig. 5）」：標題的數字 5 不在本頁卡片中
+- 8 頁；需要重寫：s12b
+
+### [2026-11-22 23:21:14 +0800] faithfulness gate — FAIL
+- ❌ s12b「monotonic 怎麼切（3-bit，Fig. 5）」：標題的數字 5 不在本頁卡片中
+- 8 頁；需要重寫：s12b
+
+### [2026-11-22 23:21:21 +0800] retrieve — PASS
+- g4 想起為什麼用 SAR、它怎麼運作 → mixed-signal/sar-basics/sources/razavi-2015(17), mixed-signal/sar-basics/sources/saxena-lecture(9), mixed-signal/sar-basics/sar-vs-pipeline(8), mixed-signal/monotonic/sources/liu-2010-monotonic(8), mixed-signal/basic/adc-architectures(6)
+- g5 想起 monotonic 解決什麼、怎麼算出省 81%、代價是什麼 → mixed-signal/monotonic/switching-schemes(41), mixed-signal/monotonic/sources/percy-meeting1(26), mixed-signal/monotonic/monotonic-sar-case-study(20), mixed-signal/sar-basics/comparator(12), mixed-signal/monotonic/sources/liu-2010-monotonic(12)
+
+### [2026-11-22 23:21:21 +0800] coverage gate — PASS
+- g4 OK：5 頁、6 個來源
+- g5 OK：5 頁、6 個來源
+
+### [2026-11-22 23:21:21 +0800] evidence gate — PASS
+- 24 張卡
+
+### [2026-11-22 23:21:21 +0800] human approve gate — PASS
+
+### [2026-11-22 23:21:21 +0800] faithfulness gate — PASS
+- 8 頁；需要重寫：無
+
+### [2026-11-22 23:21:21 +0800] render + render gate — PASS
+- 輸出 decks/mixed-signal/monotonic/sar-monotonic/index.html（8 頁，24 張卡片被引用，30 KB）
+
+### [2026-11-22 23:22:29 +0800] retrieve — PASS
+- g4 想起為什麼用 SAR、它怎麼運作 → mixed-signal/sar-basics/sources/razavi-2015(17), mixed-signal/sar-basics/sources/saxena-lecture(9), mixed-signal/sar-basics/sar-vs-pipeline(8), mixed-signal/monotonic/sources/liu-2010-monotonic(8), mixed-signal/basic/adc-architectures(6)
+- g5 想起 monotonic 解決什麼、怎麼算出省 81%、代價是什麼 → mixed-signal/monotonic/switching-schemes(41), mixed-signal/monotonic/sources/percy-meeting1(26), mixed-signal/monotonic/monotonic-sar-case-study(20), mixed-signal/sar-basics/comparator(12), mixed-signal/monotonic/sources/liu-2010-monotonic(12)
+
+### [2026-11-22 23:22:29 +0800] coverage gate — PASS
+- g4 OK：5 頁、6 個來源
+- g5 OK：5 頁、6 個來源
+
+### [2026-11-22 23:22:29 +0800] evidence gate — PASS
+- 24 張卡
+
+### [2026-11-22 23:22:29 +0800] human approve gate — PASS
+
+### [2026-11-22 23:22:29 +0800] faithfulness gate — PASS
+- 8 頁；需要重寫：無
+
+### [2026-11-22 23:22:29 +0800] render + render gate — PASS
+- 輸出 decks/mixed-signal/monotonic/sar-monotonic/index.html（8 頁，24 張卡片被引用，30 KB）
+
+### [2026-11-22 23:23:04 +0800] retrieve — PASS
+- g4 想起為什麼用 SAR、它怎麼運作 → mixed-signal/sar-basics/sources/razavi-2015(17), mixed-signal/sar-basics/sources/saxena-lecture(9), mixed-signal/sar-basics/sar-vs-pipeline(8), mixed-signal/monotonic/sources/liu-2010-monotonic(8), mixed-signal/basic/adc-architectures(6)
+- g5 想起 monotonic 解決什麼、怎麼算出省 81%、代價是什麼 → mixed-signal/monotonic/switching-schemes(41), mixed-signal/monotonic/sources/percy-meeting1(26), mixed-signal/monotonic/monotonic-sar-case-study(20), mixed-signal/sar-basics/comparator(12), mixed-signal/monotonic/sources/liu-2010-monotonic(12)
+
+### [2026-11-22 23:23:04 +0800] coverage gate — PASS
+- g4 OK：5 頁、6 個來源
+- g5 OK：5 頁、6 個來源
+
+### [2026-11-22 23:23:04 +0800] evidence gate — PASS
+- 24 張卡
+
+### [2026-11-22 23:23:04 +0800] human approve gate — PASS
+
+### [2026-11-22 23:23:05 +0800] faithfulness gate — PASS
+- 8 頁；需要重寫：無
+
+### [2026-11-22 23:23:05 +0800] render + render gate — PASS
+- 輸出 decks/mixed-signal/monotonic/sar-monotonic/index.html（8 頁，24 張卡片被引用，30 KB）
+
+### [2026-11-22 23:23:34 +0800] retrieve — PASS
+- g4 想起為什麼用 SAR、它怎麼運作 → mixed-signal/sar-basics/sources/razavi-2015(17), mixed-signal/sar-basics/sources/saxena-lecture(9), mixed-signal/sar-basics/sar-vs-pipeline(8), mixed-signal/monotonic/sources/liu-2010-monotonic(8), mixed-signal/basic/adc-architectures(6)
+- g5 想起 monotonic 解決什麼、怎麼算出省 81%、代價是什麼 → mixed-signal/monotonic/switching-schemes(41), mixed-signal/monotonic/sources/percy-meeting1(26), mixed-signal/monotonic/monotonic-sar-case-study(20), mixed-signal/sar-basics/comparator(12), mixed-signal/monotonic/sources/liu-2010-monotonic(12)
+
+### [2026-11-22 23:23:34 +0800] coverage gate — PASS
+- g4 OK：5 頁、6 個來源
+- g5 OK：5 頁、6 個來源
+
+### [2026-11-22 23:23:34 +0800] evidence gate — PASS
+- 24 張卡
+
+### [2026-11-22 23:23:34 +0800] human approve gate — PASS
+
+### [2026-11-22 23:23:34 +0800] faithfulness gate — PASS
+- 8 頁；需要重寫：無
+
+### [2026-11-22 23:23:34 +0800] render + render gate — PASS
+- 輸出 decks/mixed-signal/monotonic/sar-monotonic/index.html（8 頁，24 張卡片被引用，30 KB）
+
+### [2026-11-22 23:24:30 +0800] retrieve — PASS
+- g4 想起為什麼用 SAR、它怎麼運作 → mixed-signal/sar-basics/sources/razavi-2015(17), mixed-signal/sar-basics/sources/saxena-lecture(9), mixed-signal/sar-basics/sar-vs-pipeline(8), mixed-signal/monotonic/sources/liu-2010-monotonic(8), mixed-signal/basic/adc-architectures(6)
+- g5 想起 monotonic 解決什麼、怎麼算出省 81%、代價是什麼 → mixed-signal/monotonic/switching-schemes(41), mixed-signal/monotonic/sources/percy-meeting1(26), mixed-signal/monotonic/monotonic-sar-case-study(20), mixed-signal/sar-basics/comparator(12), mixed-signal/monotonic/sources/liu-2010-monotonic(12)
+
+### [2026-11-22 23:24:30 +0800] coverage gate — PASS
+- g4 OK：5 頁、6 個來源
+- g5 OK：5 頁、6 個來源
+
+### [2026-11-22 23:24:30 +0800] evidence gate — PASS
+- 24 張卡
+
+### [2026-11-22 23:24:30 +0800] human approve gate — PASS
+
+### [2026-11-22 23:24:30 +0800] faithfulness gate — PASS
+- 8 頁；需要重寫：無
+
+### [2026-11-22 23:24:30 +0800] render + render gate — PASS
+- 輸出 decks/mixed-signal/monotonic/sar-monotonic/index.html（8 頁，24 張卡片被引用，30 KB）
+

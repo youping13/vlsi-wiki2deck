@@ -80,7 +80,21 @@
      ]
     }
    ],
-   "notes": "附錄 C 有 Problem 1/2 的細節：M1 反向導通、M3 斷不開。"
+   "notes": "下一頁是附錄 C 的 Problem 1 和兩個 Solution。",
+   "figure": "m1-boot-idea"
+  },
+  {
+   "id": "s17b",
+   "layout": "diagram",
+   "kicker": "C · 對策",
+   "title": "bootstrap 的副作用怎麼補",
+   "figure": "m1-boot-fix",
+   "bullets": [
+    "(a) 上板 VDD~2VDD → M1 漏電、M3 breakdown、M5 耐壓 [c65]",
+    "(b) M1、M4 的 gate 也自舉 Vin；M5a 限制 M5 drain [c90]",
+    "(c) hold 時 M3 gate 要拉到 VDD 才斷得開 → bootstrap M3 gate [c91]"
+   ],
+   "notes": "Problem → Solution 的順序就是 (a) → (b) → (c)。"
   },
   {
    "id": "s18",
@@ -113,7 +127,8 @@
      ]
     }
    ],
-   "notes": "差動的好處：另一路剛好有反相訊號可以拿來抵消。"
+   "notes": "差動的好處：另一路剛好有反相訊號可以拿來抵消。",
+   "figure": "m1-crosscouple"
   },
   {
    "id": "s19",

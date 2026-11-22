@@ -71,6 +71,7 @@ ingested: 2026-11-21
 ## 量測與參數（p38–50、附錄 D p73–78）
 - 1 LSB = (Vref − Vgnd)/2^N；例：5 V、10 bits → 5/1024 = 4.88 mV
 - 靜態誤差：DNL、INL、gain error、offset error
+- 附錄 D 用圖說明：DNL＝每階寬度和 1 LSB 的差；INL＝和理想直線的偏差；offset error＝整條平移；gain error＝斜率不同
 - INL 在 0111111111 → 1000000000 跳動：佈線造成的寄生電容
 - SNR(dB) = 10·log10(P_signal/P_noise)
 - THD(dB) = 10·log10(P_harmonics/P_signal)

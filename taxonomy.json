@@ -16,7 +16,7 @@
    "chain": [
     {
      "text": "Flash 太貴 → 分段（two-step、pipeline）或一次 1 bit（SAR）",
-     "deck": "adc-basics",
+     "deck": "adc-architectures",
      "slide": "a1"
     },
     {

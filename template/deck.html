@@ -78,6 +78,19 @@ ul.pts li::before{content:"";position:absolute;left:4px;top:.62em;width:12px;hei
 .calc ol li{counter-increment:s;font-size:24px;line-height:1.5;padding-left:38px;position:relative}
 .calc ol li::before{content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;font-weight:700}
 .calc .result{margin-top:28px;font-size:22px;font-weight:700;background:var(--accent-soft);border-left:6px solid var(--accent);padding:12px 16px;border-radius:8px}
+.paper.big{flex:1.6}
+.paper img{cursor:zoom-in}
+#zoom{position:fixed;inset:0;z-index:20;background:rgba(10,12,16,.92);display:none;align-items:center;justify-content:center;cursor:zoom-out;padding:24px}
+#zoom.show{display:flex}
+#zoom img{max-width:100%;max-height:100%;background:#fff;border-radius:8px}
+.calc-f{gap:12px;justify-content:flex-start}
+.calc-f .given{background:var(--blue-soft);border-radius:12px;padding:10px 14px}
+.calc-f .given h3{font-size:14px;letter-spacing:.1em;color:var(--accent-2);margin-bottom:4px}
+.calc-f .given li{font-size:18px;line-height:1.5;list-style:none}
+.calc-f ol{counter-reset:s;list-style:none;display:flex;flex-direction:column;gap:10px}
+.calc-f ol li{counter-increment:s;font-size:19px;line-height:1.45;padding-left:32px;position:relative}
+.calc-f ol li::before{content:counter(s);position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.calc-f .result{font-size:18px;font-weight:700;background:var(--accent-soft);border-left:6px solid var(--accent);padding:8px 12px;border-radius:8px}
 /* 純文字頁：放大＋垂直置中，避免下半頁空白 */
 .l-bullets .col,.l-summary .col{justify-content:center;padding-bottom:40px}
 .l-bullets ul.pts,.l-summary ul.pts{gap:30px}
@@ -110,6 +123,9 @@ ul.pts li::before{content:"";position:absolute;left:4px;top:.62em;width:12px;hei
 #progress{position:fixed;left:0;top:0;height:4px;background:var(--accent);transition:width .25s;z-index:5}
 #home{position:fixed;left:14px;top:12px;z-index:7;color:#dfe6f1;background:rgba(17,21,28,.55);border:1px solid rgba(255,255,255,.18);text-decoration:none;font-size:13px;padding:5px 11px;border-radius:999px}
 #home:hover{background:rgba(17,21,28,.85)}
+.nav{position:fixed;top:50%;transform:translateY(-50%);z-index:7;width:46px;height:74px;border:1px solid rgba(255,255,255,.18);background:rgba(17,21,28,.5);color:#dfe6f1;font-size:22px;border-radius:12px;cursor:pointer}
+.nav:hover{background:rgba(17,21,28,.85)}.nav:disabled{opacity:.25;cursor:default}
+#prev{left:10px}#next{right:10px}
 #hud{position:fixed;right:16px;bottom:12px;color:#aab3c4;font-size:12px;font-family:var(--mono);opacity:.7;z-index:5}
 #notes{position:fixed;left:0;right:0;bottom:0;max-height:32vh;overflow:auto;background:#11151c;color:#dfe6f1;font-size:16px;line-height:1.6;padding:14px 22px;display:none;z-index:6;border-top:2px solid var(--accent)}
 #notes.show{display:block}
@@ -124,25 +140,27 @@ body.overview .slide{display:flex!important;position:relative;width:1280px;heigh
   #viewport{position:static;display:block}
   #stage{transform:none!important}
   .slide{display:flex!important;position:relative;page-break-after:always;box-shadow:none;animation:none}
-  #progress,#hud,#notes,#tip,#home{display:none!important}
+  #progress,#hud,#notes,#tip,#home,.nav{display:none!important}
 }
 </style>
 </head>
 <body>
 <div id="progress"></div>
 <div id="viewport"><div id="stage"></div></div>
-<a id="home" href="../../index.html" title="回大目錄">⌂ 目錄</a>
-<div id="hud">← → 換頁 · N 講稿 · O 總覽 · H 目錄 · P 列印/PDF</div>
+<a id="home" href="../../index.html" title="回到這份簡報所在的分類（H）">⌂ 回分類</a>
+<button class="nav" id="prev" title="上一頁（←）">◀</button><button class="nav" id="next" title="下一頁（→）">▶</button>
+<div id="hud">點圖放大 · ← → 換頁 · N 講稿 · O 總覽 · H 回分類 · P 列印/PDF</div>
 <div id="notes"></div>
 <div id="tip"></div>
+<div id="zoom" title="點一下或按 Esc 關閉"><img alt=""></div>
 <script>
 const DATA = /*__DECK_DATA__*/null;
 (function(){
   const deck = DATA.deck, cards = DATA.cards, figures = DATA.figures || {}, stage = document.getElementById('stage');
-  function paper(id){
+  function paper(id, cls){
     const f = figures[id]; if (!f) return '';
-    return `<figure class="paper"><div class="imgwrap"><img src="${f.src}" alt="${esc(f.label)}"></div>
-      <figcaption><b>${esc(f.label)}</b>　${esc(f.desc)}<span class="src">圖源：${esc(f.cite)}，© 原出版者，僅供教學引用</span></figcaption></figure>`;
+    return `<figure class="paper ${cls||''}"><div class="imgwrap"><img src="${f.src}" alt="${esc(f.label)}"></div>
+      <figcaption><b>${esc(f.label)}</b>　${esc(f.desc)}<span class="src">圖源：${esc(f.cite)}${/Percy/.test(f.cite)?'':'，© 原作者，僅供教學引用'}</span></figcaption></figure>`;
   }
   const wikiBase = deck.wiki_base || '../../wiki/';
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -175,13 +193,17 @@ const DATA = /*__DECK_DATA__*/null;
       inner = head(s) + `<div class="body"><div class="col"><h3>${esc(s.left_title||'')}</h3>${list(s.left, used)}</div>
         <div class="col"><h3>${esc(s.right_title||'')}</h3>${list(s.right, used)}</div></div>`;
     } else if (L === 'diagram') {
-      const visual = s.figure ? paper(s.figure) : `<div class="fig">${s.svg||''}</div>`;
-      inner = head(s) + `<div class="body"><div class="col" style="flex:.85">${list(s.bullets, used)}</div>${visual}</div>`;
+      const visual = s.figure ? paper(s.figure, 'big') : `<div class="fig">${s.svg||''}</div>`;
+      inner = head(s) + `<div class="body"><div class="col" style="flex:${s.figure?'.62':'.85'}">${list(s.bullets, used)}</div>${visual}</div>`;
     } else if (L === 'causal') {
       const TAG = {'動機':'t-motive','問題':'t-problem','為什麼':'t-why','解法':'t-solution','代價':'t-cost','優缺點':'t-cost','結果':'t-solution','原因':'t-why'};
       const visual = s.figure ? paper(s.figure) : (s.svg ? `<div class="fig">${s.svg}</div>` : '');
       const chain = `<div class="chain ${visual ? 'v' : 'h'}">${(s.chain||[]).map(c => `<div class="step ${TAG[c.tag]||'t-why'}"><div class="tag">${esc(c.tag)}</div>${list2(c.items, used)}</div>`).join('')}</div>`;
-      inner = head(s) + (visual ? `<div class="body"><div class="col" style="flex:1.05">${chain}</div>${visual}</div>` : `<div class="body">${chain}</div>`);
+      inner = head(s) + (visual ? `<div class="body"><div class="col" style="flex:${s.figure?'.8':'1.05'}">${chain}</div>${visual}</div>` : `<div class="body">${chain}</div>`);
+    } else if (L === 'calc' && s.figure) {
+      inner = head(s) + `<div class="body"><div class="col calc-f" style="flex:1">
+        <div class="given"><h3>條件</h3><ul>${(s.given||[]).map(g=>`<li>${rich(g, used)}</li>`).join('')}</ul></div>
+        <ol>${(s.steps||[]).map(g=>`<li>${rich(g, used)}</li>`).join('')}</ol>${s.result?`<div class="result">${rich(s.result, used)}</div>`:''}</div>${paper(s.figure)}</div>`;
     } else if (L === 'calc') {
       inner = head(s) + `<div class="calc"><div class="given"><h3>條件</h3><ul>${(s.given||[]).map(g=>`<li>${rich(g, used)}</li>`).join('')}</ul></div>
         <div class="steps"><h3>步驟</h3><ol>${(s.steps||[]).map(g=>`<li>${rich(g, used)}</li>`).join('')}</ol>${s.result?`<div class="result">${rich(s.result, used)}</div>`:''}</div></div>`;
@@ -208,6 +230,8 @@ const DATA = /*__DECK_DATA__*/null;
     slides.forEach((s,j) => s.classList.toggle('active', j===cur));
     document.getElementById('progress').style.width = ((cur+1)/slides.length*100)+'%';
     history.replaceState(null,'','#'+(cur+1));
+    document.getElementById('prev').disabled = cur===0;
+    document.getElementById('next').disabled = cur===slides.length-1;
     notes.innerHTML = '<b>講稿 '+(cur+1)+'：</b>'+esc(deck.slides[cur].notes||'（無）');
   }
   function fit(){
@@ -229,9 +253,14 @@ const DATA = /*__DECK_DATA__*/null;
       const s = e.target.closest('.slide'); if (s) { document.body.classList.remove('overview'); show(+s.dataset.i); fit(); }
       return;
     }
+    const im = e.target.closest('.paper img');
+    if (im) { zoom.querySelector('img').src = im.src; zoom.classList.add('show'); return; }
     if (e.target.closest('button,a,.cite')) return;
     show(e.clientX > innerWidth/3 ? cur+1 : cur-1);
   });
+  const zoom = document.getElementById('zoom');
+  zoom.onclick = () => zoom.classList.remove('show');
+  addEventListener('keydown', e => { if (e.key === 'Escape') zoom.classList.remove('show'); }, true);
   let tx = null;
   addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
   addEventListener('touchend', e => { if (tx===null) return; const d = e.changedTouches[0].clientX - tx; if (Math.abs(d)>40) show(cur + (d<0?1:-1)); tx=null; });
@@ -245,8 +274,19 @@ const DATA = /*__DECK_DATA__*/null;
   });
   document.addEventListener('mousemove', e => { tip.style.left = Math.min(e.clientX+14, innerWidth-480)+'px'; tip.style.top = Math.max(e.clientY-14-tip.offsetHeight, 8)+'px'; });
   document.addEventListener('mouseout', e => { if (e.target.closest('[data-card]')) tip.style.display = 'none'; });
-  if (deck.home) document.getElementById('home').href = deck.home;
-  addEventListener('keydown', e => { if (e.key === 'h' || e.key === 'H') location.href = document.getElementById('home').href; });
+  document.getElementById('prev').onclick = () => show(cur-1);
+  document.getElementById('next').onclick = () => show(cur+1);
+  // ⌂：回這份簡報所在的分類頁；如果就是從那頁點進來的，用 back() 保留原本捲動位置
+  const homeA = document.getElementById('home');
+  if (deck.home) homeA.href = deck.home;
+  function goHome(e){
+    const target = new URL(homeA.href, location.href);
+    let ref = null; try { ref = document.referrer && new URL(document.referrer); } catch(_){}
+    if (ref && ref.pathname === target.pathname && history.length > 1) { if (e) e.preventDefault(); history.back(); }
+    else location.href = homeA.href;
+  }
+  homeA.addEventListener('click', e => { e.preventDefault(); goHome(); });
+  addEventListener('keydown', e => { if (e.key === 'h' || e.key === 'H') goHome(); });
   fit(); show(cur);
   // LaTeX：$…$ 行內、$$…$$ 置中（KaTeX，檔案在 template/vendor/katex，離線可用）
   addEventListener('load', () => { if (window.renderMathInElement) renderMathInElement(stage, {

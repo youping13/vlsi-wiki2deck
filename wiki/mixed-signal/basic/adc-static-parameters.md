@@ -16,6 +16,11 @@ sources: [percy-meeting1, liu-2010-monotonic]
 ## 原理
 - 1 LSB = (Vref − Vgnd)/2^N；例：5 V、10 bits → 5/1024 = 4.88 mV (src: percy-meeting1)
 - 靜態誤差：DNL、INL、gain error、offset error (src: percy-meeting1)
+- DNL：每一階實際寬度和理想 1 LSB 的差；看的是「單一階」對不對。(src: percy-meeting1)
+- INL：實際轉換曲線和理想直線的偏差。(src: percy-meeting1)
+- DNL 一路累加起來就是 INL（推論）
+- Offset error：整條轉換曲線平移，第一個轉態點偏離理想位置。(src: percy-meeting1)
+- Gain error：扣掉 offset 之後，曲線斜率和理想不同，越靠滿刻度差越多。(src: percy-meeting1)
 - 動態參數看頻譜，靜態參數看轉換曲線，兩者互補。(src: percy-meeting1)
 
 ## 關鍵數字

@@ -87,7 +87,22 @@
      ]
     }
    ],
-   "notes": "這兩個問題就是 monotonic 要解的對象。"
+   "notes": "這兩個問題就是 monotonic 要解的對象。",
+   "figure": "m1-conv-annotated"
+  },
+  {
+   "id": "s12b",
+   "layout": "diagram",
+   "kicker": "B · monotonic",
+   "title": "monotonic 實際怎麼切（看圖）",
+   "figure": "liu2010-fig05",
+   "bullets": [
+    "取樣完直接比，第一步不切任何電容 [c45]",
+    "比較器看 $V_{ip}-V_{in}$，依序和 $-V_{ref}/2$、$-V_{ref}/4$ 比 [c80]",
+    "每一步只把一側往下切 → nMOS 開關、DAC 變快 [c47]",
+    "兩側都只往下 → Vcm 一路降 [c48]"
+   ],
+   "notes": "看圖：每一步只有比較結果較大的那一側有電容從 Vref 切到地。"
   },
   {
    "id": "s13",
@@ -104,7 +119,8 @@
     "步驟 3：$\\Delta V=\\dfrac{V_{ref}}{4}$，$\\Delta Q_+=(2C+C)\\dfrac{V_{ref}}{4}$ → $E=\\dfrac{3}{4}CV_{ref}^2$ [c52]"
    ],
    "result": "每一步只有一側抽電荷，而且第一步不耗能 [c50,c51]",
-   "notes": "ΔQ 只算接在 Vref 上的電容充了多少電。"
+   "notes": "ΔQ 只算接在 Vref 上的電容充了多少電。",
+   "figure": "m1-power-derivation"
   },
   {
    "id": "s14",

@@ -10,3 +10,5 @@ status: approved
 13. [calc] 能量怎麼算：3-bit 走一遍 — g5 — c49,c50,c51,c52
 14. [calc] 平均能量：省 81% 從哪來 — g5 — c53,c54,c55
 15. [causal＋論文 Fig.4] monotonic：怎麼解、為什麼省 — g5 — c45,c46,c47,c48,c56
+
+<!-- 2026-11-22 23:30：Percy 要求加 meeting 圖 → s12 配手寫註解、s13 配手寫推導、新增 s12b（Fig. 5，c45,c80,c47,c48）。Claude 依授權代為確認 -->

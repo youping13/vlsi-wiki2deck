@@ -137,6 +137,12 @@
    "goal": "g5",
    "page": "mixed-signal/monotonic/switching-schemes",
    "wiki_text": "Monotonic 的 N 位元陣列只要 2^(N−1) 顆單位電容，總電容少 50%。(src: liu-2010-monotonic)"
+  },
+  {
+   "id": "c80",
+   "goal": "g5",
+   "page": "mixed-signal/monotonic/switching-schemes",
+   "wiki_text": "比較器看到的：c：V+ = Vip，V− = Vin − Vref/2 → 比 Vip − Vin > −Vref/2；d：V+ = Vip − Vref/4，V− = Vin − Vref/2 → 比 Vip − Vin > −Vref/4 (src: percy-meeting1)"
   }
  ]
 }

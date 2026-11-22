@@ -342,3 +342,131 @@
 ### [2026-11-22 14:52:00 +0000] render + render gate — PASS
 - 輸出 decks/mixed-signal/basic/adc-basics/index.html（11 頁，45 張卡片被引用，42 KB）
 
+### [2026-11-22 23:21:11 +0800] retrieve — PASS
+- g1 想起取樣為什麼會混疊、要怎麼限頻 → mixed-signal/basic/sampling-aliasing(23), mixed-signal/basic/sources/percy-ms-notes(19), mixed-signal/sar-basics/comparator(14), mixed-signal/monotonic/sources/percy-meeting1(14), mixed-signal/monotonic/sources/liu-2010-monotonic(13)
+- g2 想起量化雜訊怎麼決定 SNR 上限、沒滿 code 會掉多少 → mixed-signal/basic/quantization-noise-snr(45), mixed-signal/basic/sources/percy-ms-notes(34), mixed-signal/basic/adc-static-parameters(9), mixed-signal/basic/adc-dynamic-parameters(8), mixed-signal/monotonic/sources/percy-meeting1(5)
+- g3 會從頻譜讀動態參數、會算 ENOB 與 FoM、認得靜態誤差、知道 INL 跳的原因 → mixed-signal/basic/adc-dynamic-parameters(28), mixed-signal/basic/adc-static-parameters(23), mixed-signal/monotonic/sources/percy-meeting1(20), mixed-signal/monotonic/sources/liu-2010-monotonic(20), mixed-signal/sar-basics/comparator(14)
+
+### [2026-11-22 23:21:11 +0800] coverage gate — PASS
+- g1 OK：5 頁、6 個來源
+- g2 OK：5 頁、4 個來源
+- g3 OK：5 頁、5 個來源
+
+### [2026-11-22 23:21:11 +0800] evidence gate — PASS
+- 41 張卡
+
+### [2026-11-22 23:21:11 +0800] human approve gate — PASS
+
+### [2026-11-22 23:21:11 +0800] faithfulness gate — FAIL
+- ❌ s9b「靜態誤差 2：Offset 與 Gain」：標題的數字 2 不在本頁卡片中
+- 11 頁；需要重寫：s9b
+
+### [2026-11-22 23:21:14 +0800] faithfulness gate — FAIL
+- ❌ s9b「靜態誤差 2：Offset 與 Gain」：標題的數字 2 不在本頁卡片中
+- 11 頁；需要重寫：s9b
+
+### [2026-11-22 23:21:21 +0800] retrieve — PASS
+- g1 想起取樣為什麼會混疊、要怎麼限頻 → mixed-signal/basic/sampling-aliasing(23), mixed-signal/basic/sources/percy-ms-notes(19), mixed-signal/sar-basics/comparator(14), mixed-signal/monotonic/sources/percy-meeting1(14), mixed-signal/monotonic/sources/liu-2010-monotonic(13)
+- g2 想起量化雜訊怎麼決定 SNR 上限、沒滿 code 會掉多少 → mixed-signal/basic/quantization-noise-snr(45), mixed-signal/basic/sources/percy-ms-notes(34), mixed-signal/basic/adc-static-parameters(9), mixed-signal/basic/adc-dynamic-parameters(8), mixed-signal/monotonic/sources/percy-meeting1(5)
+- g3 會從頻譜讀動態參數、會算 ENOB 與 FoM、認得靜態誤差、知道 INL 跳的原因 → mixed-signal/basic/adc-dynamic-parameters(28), mixed-signal/basic/adc-static-parameters(23), mixed-signal/monotonic/sources/percy-meeting1(20), mixed-signal/monotonic/sources/liu-2010-monotonic(20), mixed-signal/sar-basics/comparator(14)
+
+### [2026-11-22 23:21:21 +0800] coverage gate — PASS
+- g1 OK：5 頁、6 個來源
+- g2 OK：5 頁、4 個來源
+- g3 OK：5 頁、5 個來源
+
+### [2026-11-22 23:21:21 +0800] evidence gate — PASS
+- 41 張卡
+
+### [2026-11-22 23:21:21 +0800] human approve gate — PASS
+
+### [2026-11-22 23:21:21 +0800] faithfulness gate — PASS
+- 11 頁；需要重寫：無
+
+### [2026-11-22 23:21:21 +0800] render + render gate — PASS
+- 輸出 decks/mixed-signal/basic/adc-basics/index.html（11 頁，38 張卡片被引用，40 KB）
+
+### [2026-11-22 23:22:29 +0800] retrieve — PASS
+- g1 想起取樣為什麼會混疊、要怎麼限頻 → mixed-signal/basic/sampling-aliasing(23), mixed-signal/basic/sources/percy-ms-notes(19), mixed-signal/sar-basics/comparator(14), mixed-signal/monotonic/sources/percy-meeting1(14), mixed-signal/monotonic/sources/liu-2010-monotonic(13)
+- g2 想起量化雜訊怎麼決定 SNR 上限、沒滿 code 會掉多少 → mixed-signal/basic/quantization-noise-snr(45), mixed-signal/basic/sources/percy-ms-notes(34), mixed-signal/basic/adc-static-parameters(9), mixed-signal/basic/adc-dynamic-parameters(8), mixed-signal/monotonic/sources/percy-meeting1(5)
+- g3 會從頻譜讀動態參數、會算 ENOB 與 FoM、認得靜態誤差、知道 INL 跳的原因 → mixed-signal/basic/adc-dynamic-parameters(28), mixed-signal/basic/adc-static-parameters(23), mixed-signal/monotonic/sources/percy-meeting1(20), mixed-signal/monotonic/sources/liu-2010-monotonic(20), mixed-signal/sar-basics/comparator(14)
+
+### [2026-11-22 23:22:29 +0800] coverage gate — PASS
+- g1 OK：5 頁、6 個來源
+- g2 OK：5 頁、4 個來源
+- g3 OK：5 頁、5 個來源
+
+### [2026-11-22 23:22:29 +0800] evidence gate — PASS
+- 41 張卡
+
+### [2026-11-22 23:22:29 +0800] human approve gate — PASS
+
+### [2026-11-22 23:22:29 +0800] faithfulness gate — PASS
+- 11 頁；需要重寫：無
+
+### [2026-11-22 23:22:29 +0800] render + render gate — PASS
+- 輸出 decks/mixed-signal/basic/adc-basics/index.html（11 頁，38 張卡片被引用，41 KB）
+
+### [2026-11-22 23:23:04 +0800] retrieve — PASS
+- g1 想起取樣為什麼會混疊、要怎麼限頻 → mixed-signal/basic/sampling-aliasing(23), mixed-signal/basic/sources/percy-ms-notes(19), mixed-signal/sar-basics/comparator(14), mixed-signal/monotonic/sources/percy-meeting1(14), mixed-signal/monotonic/sources/liu-2010-monotonic(13)
+- g2 想起量化雜訊怎麼決定 SNR 上限、沒滿 code 會掉多少 → mixed-signal/basic/quantization-noise-snr(45), mixed-signal/basic/sources/percy-ms-notes(34), mixed-signal/basic/adc-static-parameters(9), mixed-signal/basic/adc-dynamic-parameters(8), mixed-signal/monotonic/sources/percy-meeting1(5)
+- g3 會從頻譜讀動態參數、會算 ENOB 與 FoM、認得靜態誤差、知道 INL 跳的原因 → mixed-signal/basic/adc-dynamic-parameters(28), mixed-signal/basic/adc-static-parameters(23), mixed-signal/monotonic/sources/percy-meeting1(20), mixed-signal/monotonic/sources/liu-2010-monotonic(20), mixed-signal/sar-basics/comparator(14)
+
+### [2026-11-22 23:23:04 +0800] coverage gate — PASS
+- g1 OK：5 頁、6 個來源
+- g2 OK：5 頁、4 個來源
+- g3 OK：5 頁、5 個來源
+
+### [2026-11-22 23:23:04 +0800] evidence gate — PASS
+- 41 張卡
+
+### [2026-11-22 23:23:04 +0800] human approve gate — PASS
+
+### [2026-11-22 23:23:04 +0800] faithfulness gate — PASS
+- 11 頁；需要重寫：無
+
+### [2026-11-22 23:23:04 +0800] render + render gate — PASS
+- 輸出 decks/mixed-signal/basic/adc-basics/index.html（11 頁，38 張卡片被引用，41 KB）
+
+### [2026-11-22 23:23:34 +0800] retrieve — PASS
+- g1 想起取樣為什麼會混疊、要怎麼限頻 → mixed-signal/basic/sampling-aliasing(23), mixed-signal/basic/sources/percy-ms-notes(19), mixed-signal/sar-basics/comparator(14), mixed-signal/monotonic/sources/percy-meeting1(14), mixed-signal/monotonic/sources/liu-2010-monotonic(13)
+- g2 想起量化雜訊怎麼決定 SNR 上限、沒滿 code 會掉多少 → mixed-signal/basic/quantization-noise-snr(45), mixed-signal/basic/sources/percy-ms-notes(34), mixed-signal/basic/adc-static-parameters(9), mixed-signal/basic/adc-dynamic-parameters(8), mixed-signal/monotonic/sources/percy-meeting1(5)
+- g3 會從頻譜讀動態參數、會算 ENOB 與 FoM、認得靜態誤差、知道 INL 跳的原因 → mixed-signal/basic/adc-dynamic-parameters(28), mixed-signal/basic/adc-static-parameters(23), mixed-signal/monotonic/sources/percy-meeting1(20), mixed-signal/monotonic/sources/liu-2010-monotonic(20), mixed-signal/sar-basics/comparator(14)
+
+### [2026-11-22 23:23:34 +0800] coverage gate — PASS
+- g1 OK：5 頁、6 個來源
+- g2 OK：5 頁、4 個來源
+- g3 OK：5 頁、5 個來源
+
+### [2026-11-22 23:23:34 +0800] evidence gate — PASS
+- 41 張卡
+
+### [2026-11-22 23:23:34 +0800] human approve gate — PASS
+
+### [2026-11-22 23:23:34 +0800] faithfulness gate — PASS
+- 11 頁；需要重寫：無
+
+### [2026-11-22 23:23:34 +0800] render + render gate — PASS
+- 輸出 decks/mixed-signal/basic/adc-basics/index.html（11 頁，38 張卡片被引用，41 KB）
+
+### [2026-11-22 23:24:30 +0800] retrieve — PASS
+- g1 想起取樣為什麼會混疊、要怎麼限頻 → mixed-signal/basic/sampling-aliasing(23), mixed-signal/basic/sources/percy-ms-notes(19), mixed-signal/sar-basics/comparator(14), mixed-signal/monotonic/sources/percy-meeting1(14), mixed-signal/monotonic/sources/liu-2010-monotonic(13)
+- g2 想起量化雜訊怎麼決定 SNR 上限、沒滿 code 會掉多少 → mixed-signal/basic/quantization-noise-snr(45), mixed-signal/basic/sources/percy-ms-notes(34), mixed-signal/basic/adc-static-parameters(9), mixed-signal/basic/adc-dynamic-parameters(8), mixed-signal/monotonic/sources/percy-meeting1(5)
+- g3 會從頻譜讀動態參數、會算 ENOB 與 FoM、認得靜態誤差、知道 INL 跳的原因 → mixed-signal/basic/adc-dynamic-parameters(28), mixed-signal/basic/adc-static-parameters(23), mixed-signal/monotonic/sources/percy-meeting1(20), mixed-signal/monotonic/sources/liu-2010-monotonic(20), mixed-signal/sar-basics/comparator(14)
+
+### [2026-11-22 23:24:30 +0800] coverage gate — PASS
+- g1 OK：5 頁、6 個來源
+- g2 OK：5 頁、4 個來源
+- g3 OK：5 頁、5 個來源
+
+### [2026-11-22 23:24:30 +0800] evidence gate — PASS
+- 41 張卡
+
+### [2026-11-22 23:24:30 +0800] human approve gate — PASS
+
+### [2026-11-22 23:24:30 +0800] faithfulness gate — PASS
+- 11 頁；需要重寫：無
+
+### [2026-11-22 23:24:30 +0800] render + render gate — PASS
+- 輸出 decks/mixed-signal/basic/adc-basics/index.html（11 頁，38 張卡片被引用，41 KB）
+

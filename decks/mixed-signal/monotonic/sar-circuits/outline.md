@@ -9,3 +9,5 @@ status: approved
 18. [causal] Cds 饋通：cross-coupled 電容 — g6 — c67,c68,c69,c70
 19. [causal] 實測功耗為什麼比預期高 — g6 — c71,c72,c73
 20. [quiz] 自我測驗：monotonic 之後為什麼要改比較器 — g6 — c57,c58,c59
+
+<!-- 2026-11-22 23:30：Percy 要求加 meeting 圖 → s17 配 idea 圖、新增 s17b（Problem 1、Solution 1/2：c65,c90,c91）、s18 配交叉耦合圖。Claude 依授權代為確認 -->

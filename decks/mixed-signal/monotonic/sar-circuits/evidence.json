@@ -107,6 +107,18 @@
    "goal": "g6",
    "page": "mixed-signal/monotonic/bootstrapped-switch",
    "wiki_text": "動機：取樣是 ADC 的第一關，開關不線性，後面再準也沒用。(src: percy-meeting1)"
+  },
+  {
+   "id": "c90",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "Solution 1：M1、M4 的 gate 也自舉一個 Vin；多一個常開開關 M5a 限制 M5 drain 電壓（最高 VDD − Vth）。(src: percy-meeting1)"
+  },
+  {
+   "id": "c91",
+   "goal": "g6",
+   "page": "mixed-signal/monotonic/bootstrapped-switch",
+   "wiki_text": "Solution 2：hold 時 M3 gate 要被拉到 VDD 才能斷開 → bootstrap M3 gate / close M3。(src: percy-meeting1)"
   }
  ]
 }

@@ -3,7 +3,7 @@
 把 LLM Wiki 變成**每一句都有出處**的教學 HTML 簡報。第一個主題：**SAR ADC**。
 
 - 📚 Wiki：[`wiki/index.md`](wiki/index.md)
-- 🧭 **大目錄（所有起點）**：[`index.html`](index.html)，照 VLSI 分類樹（[`taxonomy.json`](taxonomy.json)）導到各節點的簡報、論述和概念頁
+- 🧭 **大目錄（所有起點）**：[`index.html`](index.html)，只放分類卡；點進去是各節點頁 `nodes/<節點>/`（簡報、論述、概念頁），照 VLSI 分類樹（[`taxonomy.json`](taxonomy.json)）產生
 - 🖼 論文圖登錄：[`wiki/figures.md`](wiki/figures.md)（圖檔在 `assets/figures/`）
 - 🤖 Agent 規則：[`AGENTS.md`](AGENTS.md)
 

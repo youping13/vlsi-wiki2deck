@@ -165,8 +165,9 @@ def figure_registry() -> dict[str, dict]:
         return reg
     for line in p.read_text(encoding="utf-8").splitlines():
         cells = [c.strip() for c in line.strip().strip("|").split("|")]
-        if len(cells) == 4 and cells[0] not in ("id", "---") and not cells[0].startswith("-"):
-            reg[cells[0]] = {"source": cells[1], "label": cells[2], "desc": cells[3]}
+        if len(cells) in (4, 5) and cells[0] not in ("id", "---") and not cells[0].startswith("-"):
+            reg[cells[0]] = {"source": cells[1], "label": cells[2], "desc": cells[3],
+                             "credit": cells[4] if len(cells) == 5 else ""}
     return reg
 
 
@@ -484,14 +485,16 @@ def cmd_render(deck: Path) -> bool:
                           "text": c["wiki_text"]}
     import os
     rel = os.path.relpath(ROOT, deck).replace(os.sep, "/") + "/"   # 簡報在樹的第幾層，就往上幾層
-    data = dict(data, home=rel + "index.html")
+    node = parse_page(deck / "brief.md")["meta"].get("node", "")
+    data = dict(data, home=rel + (f"nodes/{node}/index.html" if node else "index.html"))
     reg = figure_registry()
     figs = {}
     for s in data["slides"]:
         if s.get("figure") in reg:
             fg = reg[s["figure"]]
             figs[s["figure"]] = {"src": f"{rel}assets/figures/{s['figure']}.png", "label": fg["label"],
-                                 "desc": fg["desc"], "cite": source_citation(fg["source"])}
+                                 "desc": fg["desc"],
+                                 "cite": fg["credit"] or source_citation(fg["source"])}
     payload = json.dumps({"deck": data, "cards": card_meta, "figures": figs}, ensure_ascii=False)
     payload = payload.replace("</", "<\\/")
     tpl = TEMPLATE.read_text(encoding="utf-8")
@@ -684,11 +687,27 @@ def cmd_hub(_deck=None) -> bool:
                 "chain": chain, "children": kids, "total": total}
 
     tree = build(tax, "")
-    hub = {"tree": tree, "links": tax.get("links", []), "generated": f"{_dt.datetime.now().astimezone():%Y-%m-%d %H:%M}"}
-    payload = json.dumps(hub, ensure_ascii=False).replace("</", "<\\/")
+    gen = f"{_dt.datetime.now().astimezone():%Y-%m-%d %H:%M}"
     tpl = (ROOT / "template" / "hub.html").read_text(encoding="utf-8")
-    (ROOT / "index.html").write_text(tpl.replace("/*__HUB_DATA__*/null", payload)
-                                     .replace("__HUB_TITLE__", html.escape(tax["title"])), encoding="utf-8")
+
+    def write(out: Path, node: dict, crumbs: list[dict]):
+        """根目錄只放分類卡；每個分類各一頁（nodes/<path>/index.html），點進去才看細節。"""
+        import os
+        rel = os.path.relpath(ROOT, out.parent).replace(os.sep, "/") + "/"
+        rel = "" if rel == "./" else rel
+        hub = {"node": node, "crumbs": crumbs, "rel": rel, "root": node is tree,
+               "links": tax.get("links", []), "generated": gen}
+        payload = json.dumps(hub, ensure_ascii=False).replace("</", "<\\/")
+        title = tax["title"] if node is tree else f"{node['title']} · {tax['title']}"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(tpl.replace("/*__HUB_DATA__*/null", payload).replace("__HUB_TITLE__", html.escape(title)),
+                       encoding="utf-8")
+        for ch in node["children"]:
+            write(ROOT / "nodes" / ch["path"] / "index.html", ch, crumbs + [{"title": node["title"], "path": node["path"]}])
+
+    import shutil
+    shutil.rmtree(ROOT / "nodes", ignore_errors=True)
+    write(ROOT / "index.html", tree, [])
     used = [d["node"] for d in decks] + [node_of_key(k) for k in pages]
     empty = [n["path"] for n in nodes.values() if n["path"] and not any(u == n["path"] or u.startswith(n["path"] + "/") for u in used)]
     r.info(f"index.html：{len(nodes) - 1} 個節點、{len(decks)} 份簡報、{sum(len(d['slides']) for d in decks)} 頁、"

@@ -1,61 +1,4 @@
 {
-  "g7": {
-    "goal": "想起各種 ADC 架構為什麼存在、各自用什麼換什麼",
-    "keywords": [
-      "Flash",
-      "Two-step",
-      "Pipeline",
-      "Integrating",
-      "Time-interleaved",
-      "比較器"
-    ],
-    "hits": [
-      {
-        "page": "mixed-signal/basic/adc-architectures",
-        "score": 46,
-        "sources": [
-          "kester-mt021",
-          "percy-meeting1",
-          "razavi-2015",
-          "saxena-lecture"
-        ]
-      },
-      {
-        "page": "mixed-signal/sar-basics/comparator",
-        "score": 16,
-        "sources": [
-          "liu-2010-monotonic",
-          "percy-meeting1",
-          "razavi-2015",
-          "saxena-lecture",
-          "tang-2022-survey"
-        ]
-      },
-      {
-        "page": "mixed-signal/sar-basics/sar-vs-pipeline",
-        "score": 14,
-        "sources": [
-          "razavi-2015",
-          "saxena-lecture",
-          "tang-2022-survey"
-        ]
-      },
-      {
-        "page": "mixed-signal/monotonic/sources/percy-meeting1",
-        "score": 14,
-        "sources": [
-          "percy-meeting1"
-        ]
-      },
-      {
-        "page": "mixed-signal/monotonic/sources/liu-2010-monotonic",
-        "score": 11,
-        "sources": [
-          "liu-2010-monotonic"
-        ]
-      }
-    ]
-  },
   "g1": {
     "goal": "想起取樣為什麼會混疊、要怎麼限頻",
     "keywords": [
@@ -92,7 +35,7 @@
       },
       {
         "page": "mixed-signal/monotonic/sources/percy-meeting1",
-        "score": 13,
+        "score": 14,
         "sources": [
           "percy-meeting1"
         ]
@@ -133,7 +76,7 @@
       },
       {
         "page": "mixed-signal/basic/adc-static-parameters",
-        "score": 8,
+        "score": 9,
         "sources": [
           "liu-2010-monotonic",
           "percy-meeting1"
@@ -149,27 +92,29 @@
         ]
       },
       {
-        "page": "mixed-signal/monotonic/sources/liu-2010-monotonic",
+        "page": "mixed-signal/monotonic/sources/percy-meeting1",
         "score": 5,
         "sources": [
-          "liu-2010-monotonic"
+          "percy-meeting1"
         ]
       }
     ]
   },
   "g3": {
-    "goal": "會從頻譜讀動態參數、會算 ENOB 與 FoM、知道 INL 跳的原因",
+    "goal": "會從頻譜讀動態參數、會算 ENOB 與 FoM、認得靜態誤差、知道 INL 跳的原因",
     "keywords": [
       "SNDR",
       "ENOB",
       "FOM",
       "INL",
-      "DNL"
+      "DNL",
+      "dBFS",
+      "offset"
     ],
     "hits": [
       {
         "page": "mixed-signal/basic/adc-dynamic-parameters",
-        "score": 22,
+        "score": 28,
         "sources": [
           "liu-2010-monotonic",
           "percy-meeting1",
@@ -178,32 +123,35 @@
       },
       {
         "page": "mixed-signal/basic/adc-static-parameters",
-        "score": 16,
+        "score": 23,
         "sources": [
           "liu-2010-monotonic",
+          "percy-meeting1"
+        ]
+      },
+      {
+        "page": "mixed-signal/monotonic/sources/percy-meeting1",
+        "score": 20,
+        "sources": [
           "percy-meeting1"
         ]
       },
       {
         "page": "mixed-signal/monotonic/sources/liu-2010-monotonic",
-        "score": 14,
+        "score": 20,
         "sources": [
           "liu-2010-monotonic"
         ]
       },
       {
-        "page": "mixed-signal/basic/figures-of-merit",
-        "score": 12,
+        "page": "mixed-signal/sar-basics/comparator",
+        "score": 14,
         "sources": [
           "liu-2010-monotonic",
+          "percy-meeting1",
+          "razavi-2015",
+          "saxena-lecture",
           "tang-2022-survey"
-        ]
-      },
-      {
-        "page": "mixed-signal/monotonic/sources/percy-meeting1",
-        "score": 8,
-        "sources": [
-          "percy-meeting1"
         ]
       }
     ]

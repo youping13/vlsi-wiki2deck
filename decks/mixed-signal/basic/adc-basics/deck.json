@@ -1,5 +1,5 @@
 {
- "title": "ADC 基本量：架構、取樣、量化、參數",
+ "title": "ADC 基本量：取樣、量化、參數",
  "author": "Percy · NCKU EE",
  "date": "2026-11",
  "wiki_base": "https://github.com/youping13/vlsi-wiki2deck/blob/main/wiki/",
@@ -9,75 +9,9 @@
    "id": "s0",
    "layout": "title",
    "kicker": "vlsi-wiki2deck · A. ADC 基本量",
-   "title": "ADC 基本量：架構、取樣、量化、參數",
-   "subtitle": "各種 ADC 怎麼取捨、取樣為什麼會混疊、量化雜訊怎麼決定 SNR 上限、從頻譜讀動態參數、INL 為什麼跳",
-   "notes": "骨架：我的 Mixed-Signal 筆記。從大目錄進來；左上角 ⌂ 回目錄。"
-  },
-  {
-   "id": "a1",
-   "layout": "causal",
-   "kicker": "A · 基本量",
-   "title": "為什麼有這麼多種 ADC",
-   "svg": "<svg viewBox='0 0 600 400' xmlns='http://www.w3.org/2000/svg' font-family='Noto Sans TC,Noto Sans CJK TC,Microsoft JhengHei,sans-serif'><defs><marker id='ah' markerWidth='10' markerHeight='10' refX='8' refY='5' orient='auto'><path d='M0,0 L10,5 L0,10 z' fill='#1d2433'/></marker></defs><text x='20' y='34' font-size='19' font-weight='700' fill='#1d2433'>分段的共同骨架：粗轉 → 殘值 → 細轉</text><text x='20' y='112' font-size='18'>Vin</text><line x1='55' y1='106' x2='95' y2='106' stroke='#1d2433' stroke-width='1.8' marker-end='url(#ah)'/><rect x='100' y='82' width='120' height='48' rx='9' fill='#e3eff5' stroke='#1d2433' stroke-width='1.5'/><text x='160.0' y='112' font-size='17' text-anchor='middle' fill='#1d2433'>Coarse ADC</text><line x1='220' y1='106' x2='260' y2='106' stroke='#1d2433' stroke-width='1.8' marker-end='url(#ah)'/><rect x='265' y='82' width='80' height='48' rx='9' fill='#e3eff5' stroke='#1d2433' stroke-width='1.5'/><text x='305.0' y='112' font-size='17' text-anchor='middle' fill='#1d2433'>DAC</text><line x1='345' y1='106' x2='385' y2='106' stroke='#1d2433' stroke-width='1.8' marker-end='url(#ah)'/><circle cx='405' cy='106' r='18' fill='#fff' stroke='#1d2433' stroke-width='1.5'/><text x='405' y='112' font-size='20' text-anchor='middle'>−</text><path d='M75,106 V60 H405 V86' fill='none' stroke='#1d2433' stroke-width='1.5' marker-end='url(#ah)'/><line x1='423' y1='106' x2='455' y2='106' stroke='#1d2433' stroke-width='1.8' marker-end='url(#ah)'/><polygon points='460,84 500,106 460,128' fill='#fbe9df' stroke='#1d2433' stroke-width='1.5'/><text x='474' y='112' font-size='15'>G</text><line x1='500' y1='106' x2='520' y2='106' stroke='#1d2433' stroke-width='1.8' marker-end='url(#ah)'/><text x='525' y='96' font-size='14' fill='#4a5468'>殘值</text><rect x='400' y='190' width='140' height='48' rx='9' fill='#e3eff5' stroke='#1d2433' stroke-width='1.5'/><text x='470.0' y='220' font-size='17' text-anchor='middle' fill='#1d2433'>Fine ADC</text><path d='M560,106 H575 V214 H545' fill='none' stroke='#1d2433' stroke-width='1.5' marker-end='url(#ah)'/><text x='160' y='170' font-size='16' fill='#2f6f8f'>D_coarse（高位元）</text><text x='470' y='275' font-size='16' text-anchor='middle' fill='#2f6f8f'>D_fine（低位元）</text><text x='20' y='330' font-size='16' fill='#1d2433'>Two-step：一段粗、一段細</text><text x='20' y='356' font-size='16' fill='#1d2433'>Pipeline：把這個骨架串很多級，各級同時處理不同取樣點</text><text x='590' y='392' font-size='13' text-anchor='end' fill='#8a93a6'>示意圖（自己畫）</text></svg>",
-   "chain": [
-    {
-     "tag": "動機",
-     "items": [
-      "Flash 一次和很多 Vref 比完，最快最簡單 [c34]"
-     ]
-    },
-    {
-     "tag": "問題",
-     "items": [
-      "要 $2^n-1$ 個比較器 → 耗電、高解析度很複雜 [c35]"
-     ]
-    },
-    {
-     "tag": "解法",
-     "items": [
-      "分段：先粗轉，殘值放大後再細轉（two-step、pipeline）[c36,c37]",
-      "SAR：一個比較器重複 N 次 [c39]"
-     ]
-    },
-    {
-     "tag": "代價",
-     "items": [
-      "pipeline 要 op-amp 放大殘值 [c38]",
-      "SAR 一個 bit 一個週期，速度有限 [c46]"
-     ]
-    }
-   ],
-   "notes": "所有架構都在「一次做完 vs 分好幾次做」之間取捨。"
-  },
-  {
-   "id": "a2",
-   "layout": "calc",
-   "kicker": "A · 基本量",
-   "title": "算一次：Flash vs Two-step 要幾顆比較器",
-   "given": [
-    "Flash：$2^n-1$ 個比較器 [c35]",
-    "2-2 two-step：先決定 2 個 MSB，再對殘值決定 2 個 LSB [c42]"
-   ],
-   "steps": [
-    "4-bit Flash：$2^4-1=15$ 個 [c43]",
-    "2-2 two-step：每段 $2^2-1=3$ 個，兩段共 6 個 [c43]",
-    "中間多了 DAC、相減、放大 G [c47]"
-   ],
-   "result": "分段 = 用多一次轉換（和殘值放大）換比較器數量 [c36]",
-   "notes": "位元越多差越大：Flash 指數成長，分段只跟每段的位元數有關。"
-  },
-  {
-   "id": "a3",
-   "layout": "bullets",
-   "kicker": "A · 基本量",
-   "title": "另外兩個方向：用時間換精度、用並排換速度",
-   "bullets": [
-    "Integrating：固定時間 T1 用輸入充電，再用參考放電，數放電時間 [c40]",
-    "Time-interleaved：多個通道輪流取樣，單一通道來不及就並排 [c41]",
-    "SAR + TI：多顆 SAR 共用時脈，各自寫進 RAM 再輪流讀出 [c45]",
-    "極端例子：8 位元 56 GS/s 用了 320 個 175 MS/s 的 SAR [c44]"
-   ],
-   "notes": "TI 的代價（通道之間的失配）目前 wiki 還沒有資料，之後有論文再補。"
+   "title": "ADC 基本量：取樣、量化、參數",
+   "subtitle": "取樣為什麼會混疊、量化雜訊怎麼決定 SNR 上限、從頻譜讀動態參數、靜態誤差長什麼樣、INL 為什麼跳",
+   "notes": "骨架：我的 Mixed-Signal 筆記。各種 ADC 架構拆到另一份「ADC 架構」。左上角 ⌂ 回分類頁。"
   },
   {
    "id": "s3",
@@ -196,6 +130,19 @@
    "notes": "動機：靜態參數看不出高頻表現，所以要用正弦輸入看 FFT。"
   },
   {
+   "id": "s7b",
+   "layout": "diagram",
+   "kicker": "A · 基本量",
+   "title": "SFDR：dBc 還是 dBFS",
+   "figure": "m1-fft-params",
+   "bullets": [
+    "$\\mathrm{SFDR}=10\\log_{10}\\dfrac{P_{signal}}{P_{max\\_spur}}$ [c22]",
+    "dBc：相對輸入訊號；dBFS：相對滿刻度 [c54]",
+    "兩者差的就是輸入離滿刻度多遠，比較前先看單位 [c55]"
+   ],
+   "notes": "圖上 FS 是滿刻度那條線，carrier 是輸入訊號，最高的 spur 和兩者的距離就是兩種 SFDR。"
+  },
+  {
    "id": "s8",
    "layout": "calc",
    "kicker": "A · 基本量",
@@ -210,7 +157,33 @@
     "0.826 mW / (580 × 50 MHz) ≈ 28.5 fJ [c28]"
    ],
    "result": "≈ 論文寫的 FoM 29 fJ/conversion-step [c26]",
-   "notes": "自己算一次就知道 FoM 的每個數字從哪來。"
+   "notes": "自己算一次就知道 FoM 的每個數字從哪來。",
+   "figure": "liu2010-fig15"
+  },
+  {
+   "id": "s9a",
+   "layout": "diagram",
+   "kicker": "A · 基本量",
+   "title": "靜態誤差：DNL 與 INL",
+   "figure": "m1-dnl-inl",
+   "bullets": [
+    "DNL：每一階實際寬度和理想 1 LSB 的差 [c49]",
+    "INL：整條轉換曲線和理想直線的偏差 [c50]",
+    "DNL 一路累加起來就是 INL [c53]"
+   ],
+   "notes": "(a) 看單一階寬度；(b) 看整條線。下一頁的 offset、gain 是整條線的平移和斜率。"
+  },
+  {
+   "id": "s9b",
+   "layout": "diagram",
+   "kicker": "A · 基本量",
+   "title": "靜態誤差：Offset 與 Gain",
+   "figure": "m1-offset-gain",
+   "bullets": [
+    "Offset error：整條曲線平移，第一個轉態點偏掉 [c51]",
+    "Gain error：扣掉 offset 後斜率不同，越靠滿刻度差越多 [c52]"
+   ],
+   "notes": "這兩個可以用校正（減掉、乘回去）修；DNL/INL 是形狀問題，比較難修。"
   },
   {
    "id": "s9",

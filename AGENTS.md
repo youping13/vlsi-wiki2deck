@@ -106,14 +106,14 @@ python pipeline/wiki2deck.py all       decks/mixed-signal/monotonic/sar-monotoni
 - 數字要原封不動出現在被引用的卡片 `wiki_text` 裡（腳本會比對）。
 - 重做時只改 check-report 指出的頁，其他頁不要動。
 - **數學符號用 LaTeX**：行內 `$V_X = V_i - \frac{V_R}{2}$`，分數一律寫 `\frac{a}{b}`（腳本靠大括號分開數字）。由 KaTeX 渲染，檔案在 `template/vendor/katex/`，離線也能用。
-- **論文原圖**：只能用 `wiki/figures.md` 登錄過的圖，在 slide 加 `"figure": "<id>"`。圖說和出處由腳本從登錄表自動產生，AI 不寫出處。放圖的那一頁，至少要有一張卡片引用該圖的來源論文。
+- **論文原圖**：只能用 `wiki/figures.md` 登錄過的圖，在 slide 加 `"figure": "<id>"`。圖說和出處由腳本從登錄表自動產生，AI 不寫出處。登錄表第 5 欄「原始出處」填圖真正的來源（網址、論文；自己的手寫寫 Percy 手寫註解），沒填就用 source 的論文引用。圖是重點：meeting 簡報裡的架構圖、電路圖、手寫推導，優先放進對應的頁。放圖的那一頁，至少要有一張卡片引用該圖的來源論文。
 
 ## 5. 大目錄（所有起點）
 
-- 根目錄 `index.html` 是大目錄，由 `python pipeline/wiki2deck.py hub` 依 `taxonomy.json` 產生，**不要手改**。最上層是 VLSI，底下每個節點列出：簡報、每篇來源的論述、概念頁；沒有內容的節點顯示「待新增」。
+- 根目錄 `index.html` 是大目錄，由 `python pipeline/wiki2deck.py hub` 依 `taxonomy.json` 產生，**不要手改**。根目錄只放分類卡（標題、一句話、數量、子分類）；每個節點各有一頁 `nodes/<節點>/index.html`，點進去才看：因果鏈、子分類、簡報（含每頁標題）、每篇來源的論述、概念頁；沒有內容的節點顯示「待新增」。
 - 一份簡報 = `decks/<節點>/<slug>/`；`brief.md` 前段要有 `node`、`order`、`summary`、`skeleton`（骨架來源）。
 - 節點的因果鏈寫在 `taxonomy.json` 該節點的 `chain`，每一項指向某份簡報的某一頁（slide id），指錯頁 hub 會失敗。
-- 簡報要短：一份只講一條因果鏈，超過約 10 頁就拆。每份簡報左上角都有「⌂ 目錄」（快捷鍵 H）回大目錄。
+- 簡報要短：一份只講一條因果鏈，超過約 10 頁就拆。每份簡報左上角都有「⌂ 回分類」（快捷鍵 H）回到這份簡報所在的節點頁（會回到原本捲到的位置）；左右兩側有 ◀ ▶ 換頁；點圖可以放大。
 - 改完任何東西：`python pipeline/wiki2deck.py build`。
 
 ## 6. 可重用
